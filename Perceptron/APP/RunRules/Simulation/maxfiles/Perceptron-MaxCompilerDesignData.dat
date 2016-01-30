@@ -1,0 +1,1959 @@
+#ifdef MAXCOMPILER_VERSION_INFO
+#define MAXCOMPILER_VERSION_INFO_PRESENT 1
+#define MAXFILE_MAXCOMPILER_VERSION_YEAR         2015
+#define MAXFILE_MAXCOMPILER_VERSION_NUM          1
+#define MAXFILE_MAXCOMPILER_VERSION_POINT        1
+#define MAXFILE_MAXCOMPILER_VERSION_PATCH        ""
+#define MAXFILE_MAXCOMPILER_VERSION_REV          44944
+#define MAXFILE_MAXCOMPILER_VERSION_RELEASE_DATE "2015-08-07"
+#define MAXFILE_MAXCOMPILER_VERSION_RELEASE_MODE true
+#endif
+
+#ifdef MAXFILE_BUILD_INFO
+#define MAXFILE_BUILD_INFO_PRESENT 1
+#define MAXFILE_BUILD_NAME "Perceptron"
+#define MAXFILE_BUILD_DIR  "/home/demo/Desktop/MaxCompiler-Builds/Perceptron_VECTIS_DFE_SIM"
+#define MAXFILE_BUILD_DATE  20160129
+#define MAXFILE_BUILD_REV   1
+#endif
+
+#ifdef PARAM
+#define PARAM_PRESENT 1
+PARAM(APP_ID, 0)
+PARAM(REV_ID, 0)
+PARAM(CHAIN_LENGTH, 45)
+PARAM(IS_SIMULATION, 1)
+PARAM(MEC_SUPPORTED, 1)
+PARAM(PCIE_SLAVE_STREAMING, 0)
+PARAM(PCIE_ALIGNMENT, 16)
+PARAM(NUM_IFPGA_LINKS, 0)
+#endif
+
+#ifdef STRING_PARAM
+#define STRING_PARAM_PRESENT 1
+STRING_PARAM(BOARD_MODEL, "MAX3424A")
+#endif
+
+
+
+#ifdef INCLUDE_GENERATED_CPP_HEADERS
+#include "PerceptronKernel.h"
+#endif
+
+
+
+
+
+
+
+
+#ifdef STREAM_OFFSET_AUTO_LOOP_VAR
+#define STREAM_OFFSET_AUTO_LOOP_VAR_PRESENT 1
+STREAM_OFFSET_AUTO_LOOP_VAR(PerceptronKernel, loopLength, 13)
+#endif
+
+
+#ifdef MANAGER_NODE
+#define MANAGER_NODE_PRESENT 1
+MANAGER_NODE(PerceptronKernel, Kernel)
+MANAGER_NODE(cls, PCIe_From_Host_fwd)
+MANAGER_NODE(x1, PCIe_From_Host_fwd)
+MANAGER_NODE(x2, PCIe_From_Host_fwd)
+MANAGER_NODE(y, PCIe_From_Host_fwd)
+MANAGER_NODE(w0, PCIe_To_Host_fwd)
+MANAGER_NODE(w1, PCIe_To_Host_fwd)
+MANAGER_NODE(w2, PCIe_To_Host_fwd)
+MANAGER_NODE(Stream_1, DualAspectMux)
+MANAGER_NODE(Stream_4, DualAspectMux)
+MANAGER_NODE(Stream_7, DualAspectMux)
+MANAGER_NODE(Stream_10, DualAspectMux)
+MANAGER_NODE(Stream_15, DualAspectReg)
+MANAGER_NODE(Stream_18, DualAspectReg)
+MANAGER_NODE(Stream_21, DualAspectReg)
+MANAGER_NODE(Stream_41, StreamPullPushAdapter)
+MANAGER_NODE(Stream_45, StreamPullPushAdapter)
+MANAGER_NODE(Stream_49, StreamPullPushAdapter)
+MANAGER_NODE(Stream_25, Fifo)
+MANAGER_NODE(Stream_29, Fifo)
+MANAGER_NODE(Stream_33, Fifo)
+MANAGER_NODE(Stream_37, Fifo)
+MANAGER_NODE(Stream_39, Fifo)
+MANAGER_NODE(Stream_43, Fifo)
+MANAGER_NODE(Stream_47, Fifo)
+#endif
+
+#ifdef MANAGER_NODE_IO
+#define MANAGER_NODE_IO_PRESENT 1
+MANAGER_NODE_IO(PerceptronKernel, cls, IN, STREAM, 32, PULL)
+MANAGER_NODE_IO(PerceptronKernel, x1, IN, STREAM, 32, PULL)
+MANAGER_NODE_IO(PerceptronKernel, x2, IN, STREAM, 32, PULL)
+MANAGER_NODE_IO(PerceptronKernel, y, IN, STREAM, 32, PULL)
+MANAGER_NODE_IO(PerceptronKernel, w0, OUT, STREAM, 32, PUSH)
+MANAGER_NODE_IO(PerceptronKernel, w1, OUT, STREAM, 32, PUSH)
+MANAGER_NODE_IO(PerceptronKernel, w2, OUT, STREAM, 32, PUSH)
+MANAGER_NODE_IO(cls, cls, OUT, STREAM, 128, PULL)
+MANAGER_NODE_IO(x1, x1, OUT, STREAM, 128, PULL)
+MANAGER_NODE_IO(x2, x2, OUT, STREAM, 128, PULL)
+MANAGER_NODE_IO(y, y, OUT, STREAM, 128, PULL)
+MANAGER_NODE_IO(w0, w0, IN, STREAM, 128, PUSH)
+MANAGER_NODE_IO(w1, w1, IN, STREAM, 128, PUSH)
+MANAGER_NODE_IO(w2, w2, IN, STREAM, 128, PUSH)
+MANAGER_NODE_IO(Stream_1, input, IN, STREAM, 128, PULL)
+MANAGER_NODE_IO(Stream_1, output, OUT, STREAM, 32, PUSH)
+MANAGER_NODE_IO(Stream_4, input, IN, STREAM, 128, PULL)
+MANAGER_NODE_IO(Stream_4, output, OUT, STREAM, 32, PUSH)
+MANAGER_NODE_IO(Stream_7, input, IN, STREAM, 128, PULL)
+MANAGER_NODE_IO(Stream_7, output, OUT, STREAM, 32, PUSH)
+MANAGER_NODE_IO(Stream_10, input, IN, STREAM, 128, PULL)
+MANAGER_NODE_IO(Stream_10, output, OUT, STREAM, 32, PUSH)
+MANAGER_NODE_IO(Stream_15, input, IN, STREAM, 32, PULL)
+MANAGER_NODE_IO(Stream_15, output, OUT, STREAM, 128, PULL)
+MANAGER_NODE_IO(Stream_18, input, IN, STREAM, 32, PULL)
+MANAGER_NODE_IO(Stream_18, output, OUT, STREAM, 128, PULL)
+MANAGER_NODE_IO(Stream_21, input, IN, STREAM, 32, PULL)
+MANAGER_NODE_IO(Stream_21, output, OUT, STREAM, 128, PULL)
+MANAGER_NODE_IO(Stream_41, input, IN, STREAM, 128, PULL)
+MANAGER_NODE_IO(Stream_41, output, OUT, STREAM, 128, PUSH)
+MANAGER_NODE_IO(Stream_45, input, IN, STREAM, 128, PULL)
+MANAGER_NODE_IO(Stream_45, output, OUT, STREAM, 128, PUSH)
+MANAGER_NODE_IO(Stream_49, input, IN, STREAM, 128, PULL)
+MANAGER_NODE_IO(Stream_49, output, OUT, STREAM, 128, PUSH)
+MANAGER_NODE_IO(Stream_25, input, IN, STREAM, 32, PUSH)
+MANAGER_NODE_IO(Stream_25, output, OUT, STREAM, 32, PULL)
+MANAGER_NODE_IO(Stream_29, input, IN, STREAM, 32, PUSH)
+MANAGER_NODE_IO(Stream_29, output, OUT, STREAM, 32, PULL)
+MANAGER_NODE_IO(Stream_33, input, IN, STREAM, 32, PUSH)
+MANAGER_NODE_IO(Stream_33, output, OUT, STREAM, 32, PULL)
+MANAGER_NODE_IO(Stream_37, input, IN, STREAM, 32, PUSH)
+MANAGER_NODE_IO(Stream_37, output, OUT, STREAM, 32, PULL)
+MANAGER_NODE_IO(Stream_39, input, IN, STREAM, 32, PUSH)
+MANAGER_NODE_IO(Stream_39, output, OUT, STREAM, 32, PULL)
+MANAGER_NODE_IO(Stream_43, input, IN, STREAM, 32, PUSH)
+MANAGER_NODE_IO(Stream_43, output, OUT, STREAM, 32, PULL)
+MANAGER_NODE_IO(Stream_47, input, IN, STREAM, 32, PUSH)
+MANAGER_NODE_IO(Stream_47, output, OUT, STREAM, 32, PULL)
+#endif
+
+#ifdef MANAGER_STREAM
+#define MANAGER_STREAM_PRESENT 1
+MANAGER_STREAM(cls, cls, Stream_1, input, 128)
+MANAGER_STREAM(x1, x1, Stream_4, input, 128)
+MANAGER_STREAM(x2, x2, Stream_7, input, 128)
+MANAGER_STREAM(y, y, Stream_10, input, 128)
+MANAGER_STREAM(PerceptronKernel, w0, Stream_39, input, 32)
+MANAGER_STREAM(PerceptronKernel, w1, Stream_43, input, 32)
+MANAGER_STREAM(PerceptronKernel, w2, Stream_47, input, 32)
+MANAGER_STREAM(Stream_1, output, Stream_25, input, 32)
+MANAGER_STREAM(Stream_4, output, Stream_29, input, 32)
+MANAGER_STREAM(Stream_7, output, Stream_33, input, 32)
+MANAGER_STREAM(Stream_10, output, Stream_37, input, 32)
+MANAGER_STREAM(Stream_15, output, Stream_41, input, 128)
+MANAGER_STREAM(Stream_18, output, Stream_45, input, 128)
+MANAGER_STREAM(Stream_21, output, Stream_49, input, 128)
+MANAGER_STREAM(Stream_41, output, w0, w0, 128)
+MANAGER_STREAM(Stream_45, output, w1, w1, 128)
+MANAGER_STREAM(Stream_49, output, w2, w2, 128)
+MANAGER_STREAM(Stream_25, output, PerceptronKernel, cls, 32)
+MANAGER_STREAM(Stream_29, output, PerceptronKernel, x1, 32)
+MANAGER_STREAM(Stream_33, output, PerceptronKernel, x2, 32)
+MANAGER_STREAM(Stream_37, output, PerceptronKernel, y, 32)
+MANAGER_STREAM(Stream_39, output, Stream_15, input, 32)
+MANAGER_STREAM(Stream_43, output, Stream_18, input, 32)
+MANAGER_STREAM(Stream_47, output, Stream_21, input, 32)
+#endif
+
+#ifdef MANAGER_NODE_STACK_TRACE
+#define MANAGER_NODE_STACK_TRACE_PRESENT 1
+MANAGER_NODE_STACK_TRACE(PerceptronKernel, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+MANAGER_NODE_STACK_TRACE(cls, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+MANAGER_NODE_STACK_TRACE(x1, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+MANAGER_NODE_STACK_TRACE(x2, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+MANAGER_NODE_STACK_TRACE(y, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+MANAGER_NODE_STACK_TRACE(w0, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+MANAGER_NODE_STACK_TRACE(w1, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+MANAGER_NODE_STACK_TRACE(w2, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+MANAGER_NODE_STACK_TRACE(Stream_1, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+MANAGER_NODE_STACK_TRACE(Stream_4, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+MANAGER_NODE_STACK_TRACE(Stream_7, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+MANAGER_NODE_STACK_TRACE(Stream_10, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+MANAGER_NODE_STACK_TRACE(Stream_15, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+MANAGER_NODE_STACK_TRACE(Stream_18, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+MANAGER_NODE_STACK_TRACE(Stream_21, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+MANAGER_NODE_STACK_TRACE(Stream_41, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+MANAGER_NODE_STACK_TRACE(Stream_45, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+MANAGER_NODE_STACK_TRACE(Stream_49, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+MANAGER_NODE_STACK_TRACE(Stream_25, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+MANAGER_NODE_STACK_TRACE(Stream_29, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+MANAGER_NODE_STACK_TRACE(Stream_33, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+MANAGER_NODE_STACK_TRACE(Stream_37, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+MANAGER_NODE_STACK_TRACE(Stream_39, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+MANAGER_NODE_STACK_TRACE(Stream_43, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+MANAGER_NODE_STACK_TRACE(Stream_47, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+#endif
+
+
+#ifdef MANAGER_NODE_PROPERTY
+#define MANAGER_NODE_PROPERTY_PRESENT 1
+MANAGER_NODE_PROPERTY(PerceptronKernel, control_pipelining_depth, 2)
+#endif
+
+
+#ifdef KERNEL_CORE
+#define KERNEL_CORE_PRESENT 1
+KERNEL_CORE(PerceptronKernel)
+#endif
+
+#ifdef KERNEL_HOST_CONTROLLED
+#define KERNEL_HOST_CONTROLLED_PRESENT 1
+KERNEL_HOST_CONTROLLED(PerceptronKernel, PerceptronKernel)
+#endif
+
+#ifdef DEBUG_INPUT_BITS
+#define DEBUG_INPUT_BITS_PRESENT 1
+DEBUG_INPUT_BITS(PerceptronKernel, cls, 0)
+DEBUG_INPUT_BITS(PerceptronKernel, x1, 1)
+DEBUG_INPUT_BITS(PerceptronKernel, x2, 2)
+DEBUG_INPUT_BITS(PerceptronKernel, y, 3)
+#endif
+
+#ifdef DEBUG_OUTPUT_BITS
+#define DEBUG_OUTPUT_BITS_PRESENT 1
+DEBUG_OUTPUT_BITS(PerceptronKernel, w0, 0)
+DEBUG_OUTPUT_BITS(PerceptronKernel, w1, 1)
+DEBUG_OUTPUT_BITS(PerceptronKernel, w2, 2)
+#endif
+
+#ifdef MANAGER_NODE_CPP_SIM_MODEL_CTOR
+#define MANAGER_NODE_CPP_SIM_MODEL_CTOR_PRESENT 1
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(cls, PCIePullSourceSyncMax3, "cls")
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(x1, PCIePullSourceSyncMax3, "x1")
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(x2, PCIePullSourceSyncMax3, "x2")
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(y, PCIePullSourceSyncMax3, "y")
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(Stream_1, DualAspectMuxSync, "Stream_1", 32, 4)
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(Stream_4, DualAspectMuxSync, "Stream_4", 32, 4)
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(Stream_7, DualAspectMuxSync, "Stream_7", 32, 4)
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(Stream_10, DualAspectMuxSync, "Stream_10", 32, 4)
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(Stream_25, FifoPushToPullSync, "Stream_25", false, 512, 32)
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(Stream_29, FifoPushToPullSync, "Stream_29", false, 512, 32)
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(Stream_33, FifoPushToPullSync, "Stream_33", false, 512, 32)
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(Stream_37, FifoPushToPullSync, "Stream_37", false, 512, 32)
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(PerceptronKernel, PerceptronKernel, "PerceptronKernel")
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(Stream_39, FifoPushToPullSync, "Stream_39", false, 512, 32)
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(Stream_43, FifoPushToPullSync, "Stream_43", false, 512, 32)
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(Stream_47, FifoPushToPullSync, "Stream_47", false, 512, 32)
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(Stream_15, DualAspectRegSync, "Stream_15", 32, 4)
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(Stream_18, DualAspectRegSync, "Stream_18", 32, 4)
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(Stream_21, DualAspectRegSync, "Stream_21", 32, 4)
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(Stream_41, PullToPushAdapterSync, "Stream_41")
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(Stream_45, PullToPushAdapterSync, "Stream_45")
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(Stream_49, PullToPushAdapterSync, "Stream_49")
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(w0, PCIePushSinkSyncMax3, "w0")
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(w1, PCIePushSinkSyncMax3, "w1")
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(w2, PCIePushSinkSyncMax3, "w2")
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(CapabilityReg, CapRegs, "CapabilityReg", 0, 4, 3, 0, 0, 0, 0, 0, 45)
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(ifpga, IFPGARegs)
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(sfa, SFARegs)
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(ChecksumMemory, ChecksumMem, "ChecksumMemory", "c33ff57c8c9d4ca7f245cf3effe9aa52d36f44748d0155ecc89b80492c973dbb")
+#endif
+
+#ifdef MANAGER_NODE_CPP_SIM_MODEL_SETUP
+#define MANAGER_NODE_CPP_SIM_MODEL_SETUP_PRESENT 1
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(PerceptronKernel, addDebugRegister, reg_dbg_ctld_almost_empty, 4, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(PerceptronKernel, addDebugRegister, reg_dbg_ctld_done, 4, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(PerceptronKernel, addDebugRegister, reg_dbg_ctld_empty, 4, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(PerceptronKernel, addDebugRegister, reg_dbg_ctld_read, 4, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(PerceptronKernel, addDebugRegister, reg_dbg_ctld_read_pipe_dbg, 12, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(PerceptronKernel, addDebugRegister, reg_dbg_ctld_request, 4, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(PerceptronKernel, addDebugRegister, reg_dbg_done_out, 1, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(PerceptronKernel, addDebugRegister, reg_dbg_fill_level, 6, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(PerceptronKernel, addDebugRegister, reg_dbg_flush_level, 6, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(PerceptronKernel, addDebugRegister, reg_dbg_flush_start, 1, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(PerceptronKernel, addDebugRegister, reg_dbg_flush_start_level, 6, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(PerceptronKernel, addDebugRegister, reg_dbg_flushing, 1, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(PerceptronKernel, addDebugRegister, reg_dbg_full_level, 6, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(PerceptronKernel, addDebugRegister, reg_dbg_out_stall, 3, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(PerceptronKernel, addDebugRegister, reg_dbg_out_valid, 3, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(PerceptronKernel, addDebugRegister, reg_dbg_stall_vector, 3, 0)
+#endif
+
+#ifdef PCIE_STREAM
+#define PCIE_STREAM_PRESENT 1
+PCIE_STREAM(cls, STREAM_FROM_HOST, 0)
+PCIE_STREAM(x1, STREAM_FROM_HOST, 1)
+PCIE_STREAM(x2, STREAM_FROM_HOST, 2)
+PCIE_STREAM(y, STREAM_FROM_HOST, 3)
+PCIE_STREAM(w0, STREAM_TO_HOST, 0)
+PCIE_STREAM(w1, STREAM_TO_HOST, 1)
+PCIE_STREAM(w2, STREAM_TO_HOST, 2)
+#endif
+
+#ifdef REG
+#define REG_PRESENT 1
+REG(PerceptronKernel.points, 0x0, 4, hwOffsetFix(32, 0, TWOSCOMPLEMENT))
+REG(PerceptronKernel.io_cls_force_disabled, 0x4, 1, hwOffsetFix(1, 0, UNSIGNED))
+REG(PerceptronKernel.io_x1_force_disabled, 0x5, 1, hwOffsetFix(1, 0, UNSIGNED))
+REG(PerceptronKernel.io_x2_force_disabled, 0x6, 1, hwOffsetFix(1, 0, UNSIGNED))
+REG(PerceptronKernel.io_y_force_disabled, 0x7, 1, hwOffsetFix(1, 0, UNSIGNED))
+REG(PerceptronKernel.io_w0_force_disabled, 0x8, 1, hwOffsetFix(1, 0, UNSIGNED))
+REG(PerceptronKernel.io_w1_force_disabled, 0x9, 1, hwOffsetFix(1, 0, UNSIGNED))
+REG(PerceptronKernel.io_w2_force_disabled, 0xa, 1, hwOffsetFix(1, 0, UNSIGNED))
+REG(PerceptronKernel.run_cycle_count, 0xb, 6, hwOffsetFix(48, 0, UNSIGNED))
+REG(PerceptronKernel.current_run_cycle_count, 0x11, 6, hwOffsetFix(48, 0, UNSIGNED))
+REG(PerceptronKernel.dbg_ctld_almost_empty, 0x17, 1, hwBits(4))
+REG(PerceptronKernel.dbg_ctld_done, 0x18, 1, hwBits(4))
+REG(PerceptronKernel.dbg_ctld_empty, 0x19, 1, hwBits(4))
+REG(PerceptronKernel.dbg_ctld_read, 0x1a, 1, hwBits(4))
+REG(PerceptronKernel.dbg_ctld_read_pipe_dbg, 0x1b, 2, hwBits(12))
+REG(PerceptronKernel.dbg_ctld_request, 0x1d, 1, hwBits(4))
+REG(PerceptronKernel.dbg_done_out, 0x1e, 1, hwBits(1))
+REG(PerceptronKernel.dbg_fill_level, 0x1f, 1, hwBits(6))
+REG(PerceptronKernel.dbg_flush_level, 0x20, 1, hwBits(6))
+REG(PerceptronKernel.dbg_flush_start, 0x21, 1, hwBits(1))
+REG(PerceptronKernel.dbg_flush_start_level, 0x22, 1, hwBits(6))
+REG(PerceptronKernel.dbg_flushing, 0x23, 1, hwBits(1))
+REG(PerceptronKernel.dbg_full_level, 0x24, 1, hwBits(6))
+REG(PerceptronKernel.dbg_out_stall, 0x25, 1, hwBits(3))
+REG(PerceptronKernel.dbg_out_valid, 0x26, 1, hwBits(3))
+REG(PerceptronKernel.dbg_stall_vector, 0x27, 1, hwBits(3))
+REG(ifpga.ifpga_ctrl, 0x28, 1, hwBits(8))
+REG(SignalForwardingAdapter.SFA_FORWARD_EN, 0x29, 4, hwBits(32))
+#endif
+
+#ifdef REG_V2
+#define REG_V2_PRESENT 1
+REG_V2(PerceptronKernel.points, 0x0, 4, hwOffsetFix(32, 0, TWOSCOMPLEMENT), HOST_WRITE_ONLY, false)
+REG_V2(PerceptronKernel.io_cls_force_disabled, 0x4, 1, hwOffsetFix(1, 0, UNSIGNED), HOST_WRITE_ONLY, true)
+REG_V2(PerceptronKernel.io_x1_force_disabled, 0x5, 1, hwOffsetFix(1, 0, UNSIGNED), HOST_WRITE_ONLY, true)
+REG_V2(PerceptronKernel.io_x2_force_disabled, 0x6, 1, hwOffsetFix(1, 0, UNSIGNED), HOST_WRITE_ONLY, true)
+REG_V2(PerceptronKernel.io_y_force_disabled, 0x7, 1, hwOffsetFix(1, 0, UNSIGNED), HOST_WRITE_ONLY, true)
+REG_V2(PerceptronKernel.io_w0_force_disabled, 0x8, 1, hwOffsetFix(1, 0, UNSIGNED), HOST_WRITE_ONLY, true)
+REG_V2(PerceptronKernel.io_w1_force_disabled, 0x9, 1, hwOffsetFix(1, 0, UNSIGNED), HOST_WRITE_ONLY, true)
+REG_V2(PerceptronKernel.io_w2_force_disabled, 0xa, 1, hwOffsetFix(1, 0, UNSIGNED), HOST_WRITE_ONLY, true)
+REG_V2(PerceptronKernel.run_cycle_count, 0xb, 6, hwOffsetFix(48, 0, UNSIGNED), HOST_WRITE_ONLY, false)
+REG_V2(PerceptronKernel.current_run_cycle_count, 0x11, 6, hwOffsetFix(48, 0, UNSIGNED), HOST_READ_ONLY, false)
+REG_V2(PerceptronKernel.dbg_ctld_almost_empty, 0x17, 1, hwBits(4), HOST_READ_ONLY, false)
+REG_V2(PerceptronKernel.dbg_ctld_done, 0x18, 1, hwBits(4), HOST_READ_ONLY, false)
+REG_V2(PerceptronKernel.dbg_ctld_empty, 0x19, 1, hwBits(4), HOST_READ_ONLY, false)
+REG_V2(PerceptronKernel.dbg_ctld_read, 0x1a, 1, hwBits(4), HOST_READ_ONLY, false)
+REG_V2(PerceptronKernel.dbg_ctld_read_pipe_dbg, 0x1b, 2, hwBits(12), HOST_READ_ONLY, false)
+REG_V2(PerceptronKernel.dbg_ctld_request, 0x1d, 1, hwBits(4), HOST_READ_ONLY, false)
+REG_V2(PerceptronKernel.dbg_done_out, 0x1e, 1, hwBits(1), HOST_READ_ONLY, false)
+REG_V2(PerceptronKernel.dbg_fill_level, 0x1f, 1, hwBits(6), HOST_READ_ONLY, false)
+REG_V2(PerceptronKernel.dbg_flush_level, 0x20, 1, hwBits(6), HOST_READ_ONLY, false)
+REG_V2(PerceptronKernel.dbg_flush_start, 0x21, 1, hwBits(1), HOST_READ_ONLY, false)
+REG_V2(PerceptronKernel.dbg_flush_start_level, 0x22, 1, hwBits(6), HOST_READ_ONLY, false)
+REG_V2(PerceptronKernel.dbg_flushing, 0x23, 1, hwBits(1), HOST_READ_ONLY, false)
+REG_V2(PerceptronKernel.dbg_full_level, 0x24, 1, hwBits(6), HOST_READ_ONLY, false)
+REG_V2(PerceptronKernel.dbg_out_stall, 0x25, 1, hwBits(3), HOST_READ_ONLY, false)
+REG_V2(PerceptronKernel.dbg_out_valid, 0x26, 1, hwBits(3), HOST_READ_ONLY, false)
+REG_V2(PerceptronKernel.dbg_stall_vector, 0x27, 1, hwBits(3), HOST_READ_ONLY, false)
+REG_V2(ifpga.ifpga_ctrl, 0x28, 1, hwBits(8), HOST_READ_WRITE, false)
+REG_V2(SignalForwardingAdapter.SFA_FORWARD_EN, 0x29, 4, hwBits(32), HOST_READ_WRITE, false)
+#endif
+
+
+
+
+#ifdef CHECKSUM
+#define CHECKSUM_PRESENT 1
+CHECKSUM("c33ff57c8c9d4ca7f245cf3effe9aa52d36f44748d0155ecc89b80492c973dbb")
+#endif
+
+#ifdef CAPABILITY
+#define CAPABILITY_PRESENT 1
+CAPABILITY(MAX3REV, MAX3REVA)
+CAPABILITY(MAX3RAM, DDR3_24GB)
+CAPABILITY(MAX3FPGA, SXT475_2ES)
+#endif
+
+#ifdef DEFINE_DESIGN_NAME
+#define DESIGN_NAME Perceptron
+#endif /* DEFINE_DESIGN_NAME */
+
+#ifndef SLIC_NO_DECLARATIONS
+/**\file */
+#ifndef SLIC_DECLARATIONS_Perceptron_H
+#define SLIC_DECLARATIONS_Perceptron_H
+#include "MaxSLiCInterface.h"
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+
+#define Perceptron_PCIE_ALIGNMENT (16)
+
+
+/*----------------------------------------------------------------------------*/
+/*---------------------------- Interface default -----------------------------*/
+/*----------------------------------------------------------------------------*/
+
+
+
+/**
+ * \brief Auxiliary function to evaluate expression for "PerceptronKernel.loopLength".
+ */
+int Perceptron_get_PerceptronKernel_loopLength( void );
+
+
+/**
+ * \brief Basic static function for the interface 'default'.
+ * 
+ * \param [in] param_points Interface Parameter "points".
+ * \param [in] instream_cls The stream should be of size (param_points * 4) bytes.
+ * \param [in] instream_x1 The stream should be of size (param_points * 4) bytes.
+ * \param [in] instream_x2 The stream should be of size (param_points * 4) bytes.
+ * \param [in] instream_y The stream should be of size (param_points * 4) bytes.
+ * \param [out] outstream_w0 The stream should be of size (param_points * 4) bytes.
+ * \param [out] outstream_w1 The stream should be of size (param_points * 4) bytes.
+ * \param [out] outstream_w2 The stream should be of size (param_points * 4) bytes.
+ */
+void Perceptron(
+	int64_t param_points,
+	const float *instream_cls,
+	const float *instream_x1,
+	const float *instream_x2,
+	const float *instream_y,
+	float *outstream_w0,
+	float *outstream_w1,
+	float *outstream_w2);
+
+/**
+ * \brief Basic static non-blocking function for the interface 'default'.
+ * 
+ * Schedule to run on an engine and return immediately.
+ * The status of the run can be checked either by ::max_wait or ::max_nowait;
+ * note that one of these *must* be called, so that associated memory can be released.
+ * 
+ * 
+ * \param [in] param_points Interface Parameter "points".
+ * \param [in] instream_cls The stream should be of size (param_points * 4) bytes.
+ * \param [in] instream_x1 The stream should be of size (param_points * 4) bytes.
+ * \param [in] instream_x2 The stream should be of size (param_points * 4) bytes.
+ * \param [in] instream_y The stream should be of size (param_points * 4) bytes.
+ * \param [out] outstream_w0 The stream should be of size (param_points * 4) bytes.
+ * \param [out] outstream_w1 The stream should be of size (param_points * 4) bytes.
+ * \param [out] outstream_w2 The stream should be of size (param_points * 4) bytes.
+ * \return A handle on the execution status, or NULL in case of error.
+ */
+max_run_t *Perceptron_nonblock(
+	int64_t param_points,
+	const float *instream_cls,
+	const float *instream_x1,
+	const float *instream_x2,
+	const float *instream_y,
+	float *outstream_w0,
+	float *outstream_w1,
+	float *outstream_w2);
+
+/**
+ * \brief Advanced static interface, structure for the engine interface 'default'
+ * 
+ */
+typedef struct { 
+	int64_t param_points; /**<  [in] Interface Parameter "points". */
+	const float *instream_cls; /**<  [in] The stream should be of size (param_points * 4) bytes. */
+	const float *instream_x1; /**<  [in] The stream should be of size (param_points * 4) bytes. */
+	const float *instream_x2; /**<  [in] The stream should be of size (param_points * 4) bytes. */
+	const float *instream_y; /**<  [in] The stream should be of size (param_points * 4) bytes. */
+	float *outstream_w0; /**<  [out] The stream should be of size (param_points * 4) bytes. */
+	float *outstream_w1; /**<  [out] The stream should be of size (param_points * 4) bytes. */
+	float *outstream_w2; /**<  [out] The stream should be of size (param_points * 4) bytes. */
+} Perceptron_actions_t;
+
+/**
+ * \brief Advanced static function for the interface 'default'.
+ * 
+ * \param [in] engine The engine on which the actions will be executed.
+ * \param [in,out] interface_actions Actions to be executed.
+ */
+void Perceptron_run(
+	max_engine_t *engine,
+	Perceptron_actions_t *interface_actions);
+
+/**
+ * \brief Advanced static non-blocking function for the interface 'default'.
+ *
+ * Schedule the actions to run on the engine and return immediately.
+ * The status of the run can be checked either by ::max_wait or ::max_nowait;
+ * note that one of these *must* be called, so that associated memory can be released.
+ *
+ * 
+ * \param [in] engine The engine on which the actions will be executed.
+ * \param [in] interface_actions Actions to be executed.
+ * \return A handle on the execution status of the actions, or NULL in case of error.
+ */
+max_run_t *Perceptron_run_nonblock(
+	max_engine_t *engine,
+	Perceptron_actions_t *interface_actions);
+
+/**
+ * \brief Group run advanced static function for the interface 'default'.
+ * 
+ * \param [in] group Group to use.
+ * \param [in,out] interface_actions Actions to run.
+ *
+ * Run the actions on the first device available in the group.
+ */
+void Perceptron_run_group(max_group_t *group, Perceptron_actions_t *interface_actions);
+
+/**
+ * \brief Group run advanced static non-blocking function for the interface 'default'.
+ * 
+ *
+ * Schedule the actions to run on the first device available in the group and return immediately.
+ * The status of the run must be checked with ::max_wait. 
+ * Note that use of ::max_nowait is prohibited with non-blocking running on groups:
+ * see the ::max_run_group_nonblock documentation for more explanation.
+ *
+ * \param [in] group Group to use.
+ * \param [in] interface_actions Actions to run.
+ * \return A handle on the execution status of the actions, or NULL in case of error.
+ */
+max_run_t *Perceptron_run_group_nonblock(max_group_t *group, Perceptron_actions_t *interface_actions);
+
+/**
+ * \brief Array run advanced static function for the interface 'default'.
+ * 
+ * \param [in] engarray The array of devices to use.
+ * \param [in,out] interface_actions The array of actions to run.
+ *
+ * Run the array of actions on the array of engines.  The length of interface_actions
+ * must match the size of engarray.
+ */
+void Perceptron_run_array(max_engarray_t *engarray, Perceptron_actions_t *interface_actions[]);
+
+/**
+ * \brief Array run advanced static non-blocking function for the interface 'default'.
+ * 
+ *
+ * Schedule to run the array of actions on the array of engines, and return immediately.
+ * The length of interface_actions must match the size of engarray.
+ * The status of the run can be checked either by ::max_wait or ::max_nowait;
+ * note that one of these *must* be called, so that associated memory can be released.
+ *
+ * \param [in] engarray The array of devices to use.
+ * \param [in] interface_actions The array of actions to run.
+ * \return A handle on the execution status of the actions, or NULL in case of error.
+ */
+max_run_t *Perceptron_run_array_nonblock(max_engarray_t *engarray, Perceptron_actions_t *interface_actions[]);
+
+/**
+ * \brief Converts a static-interface action struct into a dynamic-interface max_actions_t struct.
+ *
+ * Note that this is an internal utility function used by other functions in the static interface.
+ *
+ * \param [in] maxfile The maxfile to use.
+ * \param [in] interface_actions The interface-specific actions to run.
+ * \return The dynamic-interface actions to run, or NULL in case of error.
+ */
+max_actions_t* Perceptron_convert(max_file_t *maxfile, Perceptron_actions_t *interface_actions);
+
+/**
+ * \brief Initialise a maxfile.
+ */
+max_file_t* Perceptron_init(void);
+
+/* Error handling functions */
+int Perceptron_has_errors(void);
+const char* Perceptron_get_errors(void);
+void Perceptron_clear_errors(void);
+/* Free statically allocated maxfile data */
+void Perceptron_free(void);
+/* returns: -1 = error running command; 0 = no error reported */
+int Perceptron_simulator_start(void);
+/* returns: -1 = error running command; 0 = no error reported */
+int Perceptron_simulator_stop(void);
+
+#ifdef __cplusplus
+}
+#endif /* __cplusplus */
+#endif /* SLIC_DECLARATIONS_Perceptron_H */
+
+#endif /* SLIC_NO_DECLARATIONS */
+
+#ifdef PHOTON_NODE_DATA
+#define PHOTON_NODE_DATA_PRESENT 1
+PHOTON_NODE_DATA(PerceptronKernel, 2, NodeConstantRawBits, "{HWOffsetFix:1, 0, UNSIGNED}\n0x1; 1.0", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.Count.makeCounterChain(Count.java:498)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:22)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 119, NodeConstantRawBits, "{HWOffsetFix:8, 0, UNSIGNED}\n0x0d; 13.0", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.Stream$OffsetExpr.getDFEVar(Stream.java:186)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:20)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 5, NodeCounterV1, "Counter(NUMERIC_INCREMENTING)\nInc: 1\nReset: 0\nInit: 0", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.CounterChain.addCounter(CounterChain.java:526)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:24)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 131, NodeConstantRawBits, "{HWOffsetFix:8, 0, UNSIGNED}\n0x00; 0.0", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.eq(DFEVar.java:589)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:39)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 68, NodeEq, "==", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.eq(DFEVar.java:589)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:39)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 69, NodeInputMappedReg, "Scalar input (io_w0_force_disabled)", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.output(IO.java:685)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:39)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 70, NodeNot, "~", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.output(IO.java:685)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:39)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 71, NodeAnd, "&", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.output(IO.java:685)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:39)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 112, NodeFIFO, "FIFO(31)", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 130, NodeConstantRawBits, "{HWOffsetFix:8, 0, UNSIGNED}\n0x00; 0.0", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.eq(DFEVar.java:589)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:28)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 19, NodeEq, "==", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.eq(DFEVar.java:589)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:28)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 20, NodeInputMappedReg, "Scalar input (io_x2_force_disabled)", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:522)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:28)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 21, NodeNot, "~", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:522)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:28)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 22, NodeAnd, "&", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:522)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:28)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 23, NodeInput, "Input(x2)", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:522)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:28)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 129, NodeConstantRawBits, "{HWOffsetFix:8, 0, UNSIGNED}\n0x00; 0.0", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.eq(DFEVar.java:589)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:29)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 25, NodeEq, "==", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.eq(DFEVar.java:589)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:29)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 26, NodeInputMappedReg, "Scalar input (io_y_force_disabled)", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:522)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:29)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 27, NodeNot, "~", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:522)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:29)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 28, NodeAnd, "&", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:522)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:29)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 29, NodeInput, "Input(y)", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:522)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:29)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 30, NodeSub, "-", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.sub(DFEVar.java:914)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:31)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 98, NodePO2FPMult, "PO2FPMult_N-1", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.mulAsRHS(DFEVar.java:985)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:31)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 97, NodeNeg, "(-)", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.mul(DFEVar.java:975)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:31)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 99, NodePO2FPMult, "PO2FPMult_N-1", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.div(DFEVar.java:1021)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:31)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 111, NodeFIFO, "FIFO(18)", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 0, NodeInputMappedReg, "Scalar input (points)", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.scalarInput(IO.java:1106)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:17)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 3, NodeCast, "{HWOffsetFix:32, 0, UNSIGNED}", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.cast(DFEVar.java:165)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:23)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 4, NodeCounterV1, "Counter(NUMERIC_INCREMENTING)\nInc: 1\nReset: 0\nInit: 0", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.CounterChain.addCounter(CounterChain.java:526)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:23)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 128, NodeConstantRawBits, "{HWOffsetFix:32, 0, UNSIGNED}\n0x00000000; 0.0", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.eq(DFEVar.java:589)\nperceptron.PerceptronKernel.carriedSum(PerceptronKernel.maxj:46)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:35)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 50, NodeEq, "==", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.eq(DFEVar.java:589)\nperceptron.PerceptronKernel.carriedSum(PerceptronKernel.maxj:46)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:35)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 108, NodeStreamOffset, "stream offset: -13", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.Stream.offset(Stream.java:269)\nperceptron.PerceptronKernel.carriedSum(PerceptronKernel.maxj:48)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:35)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 51, NodeConstantRawBits, "{HWFloat:8, 24}\n0x00000000; 0.0", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.ternaryIf(DFEVar.java:1173)\nperceptron.PerceptronKernel.carriedSum(PerceptronKernel.maxj:46)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:35)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 52, NodeMux, "MUX", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.ternaryIf(DFEVar.java:1173)\nperceptron.PerceptronKernel.carriedSum(PerceptronKernel.maxj:46)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:35)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 53, NodeAdd, "+", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.add(DFEVar.java:868)\nperceptron.PerceptronKernel.carriedSum(PerceptronKernel.maxj:47)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:35)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 72, NodeOutput, "Output(w0)", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.output(IO.java:685)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:39)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 127, NodeConstantRawBits, "{HWOffsetFix:8, 0, UNSIGNED}\n0x00; 0.0", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.eq(DFEVar.java:589)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:40)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 74, NodeEq, "==", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.eq(DFEVar.java:589)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:40)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 75, NodeInputMappedReg, "Scalar input (io_w1_force_disabled)", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.output(IO.java:685)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:40)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 76, NodeNot, "~", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.output(IO.java:685)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:40)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 77, NodeAnd, "&", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.output(IO.java:685)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:40)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 115, NodeFIFO, "FIFO(39)", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 100, NodePO2FPMult, "PO2FPMult_N-1", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.mulAsRHS(DFEVar.java:985)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:32)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 126, NodeConstantRawBits, "{HWOffsetFix:8, 0, UNSIGNED}\n0x00; 0.0", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.eq(DFEVar.java:589)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:26)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 7, NodeEq, "==", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.eq(DFEVar.java:589)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:26)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 8, NodeInputMappedReg, "Scalar input (io_cls_force_disabled)", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:522)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:26)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 9, NodeNot, "~", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:522)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:26)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 10, NodeAnd, "&", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:522)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:26)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 113, NodeFIFO, "FIFO(13)", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 11, NodeInput, "Input(cls)", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:522)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:26)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 40, NodeMul, "*", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.mul(DFEVar.java:960)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:32)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 101, NodePO2FPMult, "PO2FPMult_N-1", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.div(DFEVar.java:1021)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:32)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 125, NodeConstantRawBits, "{HWOffsetFix:32, 0, UNSIGNED}\n0x00000000; 0.0", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.eq(DFEVar.java:589)\nperceptron.PerceptronKernel.carriedSum(PerceptronKernel.maxj:46)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:36)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 56, NodeEq, "==", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.eq(DFEVar.java:589)\nperceptron.PerceptronKernel.carriedSum(PerceptronKernel.maxj:46)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:36)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 114, NodeFIFO, "FIFO(8)", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 109, NodeStreamOffset, "stream offset: -13", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.Stream.offset(Stream.java:269)\nperceptron.PerceptronKernel.carriedSum(PerceptronKernel.maxj:48)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:36)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 57, NodeConstantRawBits, "{HWFloat:8, 24}\n0x00000000; 0.0", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.ternaryIf(DFEVar.java:1173)\nperceptron.PerceptronKernel.carriedSum(PerceptronKernel.maxj:46)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:36)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 58, NodeMux, "MUX", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.ternaryIf(DFEVar.java:1173)\nperceptron.PerceptronKernel.carriedSum(PerceptronKernel.maxj:46)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:36)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 59, NodeAdd, "+", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.add(DFEVar.java:868)\nperceptron.PerceptronKernel.carriedSum(PerceptronKernel.maxj:47)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:36)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 78, NodeOutput, "Output(w1)", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.output(IO.java:685)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:40)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 124, NodeConstantRawBits, "{HWOffsetFix:8, 0, UNSIGNED}\n0x00; 0.0", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.eq(DFEVar.java:589)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:41)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 80, NodeEq, "==", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.eq(DFEVar.java:589)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:41)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 81, NodeInputMappedReg, "Scalar input (io_w2_force_disabled)", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.output(IO.java:685)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:41)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 82, NodeNot, "~", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.output(IO.java:685)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:41)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 83, NodeAnd, "&", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.output(IO.java:685)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:41)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 118, NodeFIFO, "FIFO(39)", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 102, NodePO2FPMult, "PO2FPMult_N-1", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.mulAsRHS(DFEVar.java:985)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:33)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 123, NodeConstantRawBits, "{HWOffsetFix:8, 0, UNSIGNED}\n0x00; 0.0", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.eq(DFEVar.java:589)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:27)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 13, NodeEq, "==", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.eq(DFEVar.java:589)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:27)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 14, NodeInputMappedReg, "Scalar input (io_x1_force_disabled)", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:522)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:27)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 15, NodeNot, "~", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:522)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:27)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 16, NodeAnd, "&", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:522)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:27)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 116, NodeFIFO, "FIFO(13)", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 17, NodeInput, "Input(x1)", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:522)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:27)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 46, NodeMul, "*", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.mul(DFEVar.java:960)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:33)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 103, NodePO2FPMult, "PO2FPMult_N-1", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.div(DFEVar.java:1021)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:33)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 122, NodeConstantRawBits, "{HWOffsetFix:32, 0, UNSIGNED}\n0x00000000; 0.0", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.eq(DFEVar.java:589)\nperceptron.PerceptronKernel.carriedSum(PerceptronKernel.maxj:46)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:37)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 62, NodeEq, "==", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.eq(DFEVar.java:589)\nperceptron.PerceptronKernel.carriedSum(PerceptronKernel.maxj:46)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:37)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 117, NodeFIFO, "FIFO(8)", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 110, NodeStreamOffset, "stream offset: -13", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.Stream.offset(Stream.java:269)\nperceptron.PerceptronKernel.carriedSum(PerceptronKernel.maxj:48)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:37)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 63, NodeConstantRawBits, "{HWFloat:8, 24}\n0x00000000; 0.0", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.ternaryIf(DFEVar.java:1173)\nperceptron.PerceptronKernel.carriedSum(PerceptronKernel.maxj:46)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:37)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 64, NodeMux, "MUX", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.ternaryIf(DFEVar.java:1173)\nperceptron.PerceptronKernel.carriedSum(PerceptronKernel.maxj:46)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:37)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 65, NodeAdd, "+", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.add(DFEVar.java:868)\nperceptron.PerceptronKernel.carriedSum(PerceptronKernel.maxj:47)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:37)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 84, NodeOutput, "Output(w2)", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.output(IO.java:685)\nperceptron.PerceptronKernel.<init>(PerceptronKernel.maxj:41)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:18)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 89, NodeConstantRawBits, "{HWOffsetFix:1, 0, UNSIGNED}\n0x1; 1.0", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 121, NodeConstantRawBits, "{HWOffsetFix:1, 0, UNSIGNED}\n0x1; 1.0", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 86, NodeConstantRawBits, "{HWOffsetFix:49, 0, UNSIGNED}\n0x1000000000000; 2.81474976710656E14", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 87, NodeCounterV1, "Counter(NUMERIC_INCREMENTING)\nInc: 1\nReset: 0\nInit: 0", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 88, NodeStreamOffset, "stream offset: 1", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 90, NodeOutputMappedReg, "Scalar output (current_run_cycle_count)", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 120, NodeConstantRawBits, "{HWOffsetFix:1, 0, UNSIGNED}\n0x1; 1.0", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 92, NodeConstantRawBits, "{HWOffsetFix:49, 0, UNSIGNED}\n0x1000000000000; 2.81474976710656E14", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 93, NodeCounterV1, "Counter(NUMERIC_INCREMENTING)\nInc: 1\nReset: 0\nInit: 0", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 95, NodeInputMappedReg, "Scalar input (run_cycle_count)", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 96, NodeEq, "==", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+PHOTON_NODE_DATA(PerceptronKernel, 94, NodeFlush, "flush on trigger", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:362)\nperceptron.PerceptronManager.main(PerceptronManager.maxj:26)\n")
+#endif
+
+#ifdef SLIC_USE_DEFINITIONS
+#include <stdio.h>
+#include <math.h>
+#include <pthread.h>
+#include <string.h>
+#include <unistd.h>
+#include <stdlib.h>
+static max_file_t *stored_maxfile = NULL;
+static max_engine_t *stored_engine = NULL;
+static char *stored_error = NULL;
+static int stored_has_error = 0;
+static pthread_once_t slic_bs_is_initialised = PTHREAD_ONCE_INIT;
+
+static void set_error(const char *error_str)
+{
+	stored_has_error = 1; 
+	if(stored_error == NULL) {
+		stored_error = strdup(error_str);
+	} else {
+		char *nerr = malloc(strlen(stored_error) + strlen(error_str) + 2);
+		sprintf(nerr, "%s\n%s", stored_error, error_str);
+		free(stored_error);
+		stored_error = nerr;
+	}
+}
+static void set_error_and_free(char *error_str){
+	set_error(error_str);
+	free(error_str);
+}
+int Perceptron_has_errors(void)
+{	return stored_has_error; }
+const char* Perceptron_get_errors(void)
+{	return stored_error; }
+void Perceptron_clear_errors(void)
+{
+	free(stored_error);
+	stored_error = NULL;
+	stored_has_error = 0;
+}
+
+static char Perceptron_use_simulation[16];
+static void Perceptron_def_use_simulation(void)
+{
+	long pid = ((long) getpid()) % 100000;
+	snprintf(Perceptron_use_simulation, 16, "Perceptr_%05ld_", pid);
+}
+static const char *Perceptron_check_use_simulation(void)
+{
+	Perceptron_def_use_simulation();
+	const char *use_sim = max_config_get_string(MAX_CONFIG_USE_SIMULATION);
+	if (use_sim == NULL) {
+		use_sim = Perceptron_use_simulation;
+		max_config_set_string(MAX_CONFIG_USE_SIMULATION, use_sim);
+	}
+	return use_sim;
+}
+
+static int Perceptron_simulation_launch = 0;
+int Perceptron_simulator_start(void)
+{
+	int retval = 0;
+	const char *use_sim = Perceptron_check_use_simulation();
+	char buff[1024];
+	snprintf(buff, 1024, "PATH=simutils:$PATH maxcompilersim -d 1 -n %s -c MAX3424A -S simutils restart", use_sim);
+	FILE *pipe_fp = popen(buff, "r");
+	if (pipe_fp == NULL) {
+		strncat(buff, " : failed to execute.", (1024 - strlen(buff)));
+		set_error(buff);
+		return -1;
+	}
+	while (fgets(buff, 1024, pipe_fp) != NULL) {
+		/* Uncomment this to get simulator command output */
+		/* fprintf(stderr, buff); */
+		if (strstr(buff, "Error")) {
+			set_error(buff);
+			retval = -1;
+		}
+	}
+	pclose(pipe_fp);
+	return retval;
+}
+
+int Perceptron_simulator_stop(void)
+{
+	const char *use_sim = Perceptron_check_use_simulation();
+	char buff[1024];
+	snprintf(buff, 1024, "PATH=simutils:$PATH maxcompilersim -d 1 -n %s -c MAX3424A -S simutils stop", use_sim);
+	FILE *pipe_fp = popen(buff, "r");
+	if (pipe_fp == NULL) {
+		strncat(buff, " : failed to execute.", (1024 - strlen(buff)));
+		set_error(buff);
+		return -1;
+	}
+	while (fgets(buff, 1024, pipe_fp) != NULL) {
+		/* Uncomment this to get simulator command output */
+		/* fprintf(stderr, buff); */
+		;
+	}
+	pclose(pipe_fp);
+	return 0;
+}
+
+static void Perceptron_static_init(void) 
+{
+	stored_maxfile = Perceptron_init();
+	if (stored_maxfile == NULL || !max_ok(stored_maxfile->errors)) {
+		stored_maxfile = NULL;
+		if(max_config_get_bool(MAX_CONFIG_STATIC_INTERFACE_ABORT_ON_ERROR)) abort();
+		else { set_error("Unable to load maxfile"); return; }
+	}
+	if(!max_ok(max_global_errors())) {
+		set_error_and_free(max_errors_trace(max_global_errors()));
+		return;
+	}
+	if(!max_config_get_bool(MAX_CONFIG_STATIC_INTERFACE_ABORT_ON_ERROR))
+		max_errors_mode(stored_maxfile->errors, 0);
+	time_t timeout_previous = max_load_timeout(stored_maxfile, 30);
+	const char *use_sim = Perceptron_check_use_simulation();
+	if (max_ping_daemon(stored_maxfile, use_sim) == 0) {
+		int sim_stat = Perceptron_simulator_start();
+		if ((sim_stat == 0) && (max_ping_daemon(stored_maxfile, use_sim) == 1)) {
+			Perceptron_simulation_launch = 1;
+		} else {
+			set_error("Error: An error occurred while trying to start the simulation infrastructure automatically.");
+			set_error("Error: Check that 'use_simulation=<simulator_name>' is set correctly in your SLiC configuration");
+			set_error("Error: and that the associated simulated system daemon is running.");
+			max_file_free(stored_maxfile);
+			stored_maxfile = NULL;
+			return;
+		}
+	}
+	stored_engine = max_load(stored_maxfile, "*");
+	if (!max_ok(stored_maxfile->errors)) {
+		if(max_config_get_bool(MAX_CONFIG_STATIC_INTERFACE_ABORT_ON_ERROR)) {
+			fprintf(stderr, "\nUnable to load engine: aborting now.\n\n");
+			fflush(stderr);
+			abort();
+		} else {
+			set_error_and_free(max_errors_trace(stored_maxfile->errors));
+			max_file_free(stored_maxfile);
+			stored_maxfile = NULL;
+			return;
+		} 
+	} 
+	max_load_timeout(stored_maxfile, timeout_previous);
+}
+void Perceptron_free(void)
+{
+	if (stored_engine != NULL) {
+		max_unload(stored_engine);
+		stored_engine = NULL;
+	}
+	if (stored_maxfile != NULL) {
+		max_file_free(stored_maxfile);
+		stored_maxfile = NULL;
+	}
+	if (stored_error != NULL) {
+		free(stored_error);
+		stored_error = NULL;
+	}
+	if (Perceptron_simulation_launch == 1) {
+		int sim_stat = Perceptron_simulator_stop();
+		if (sim_stat != 0 ) {
+			fprintf(stderr, "Error stopping simulator.");
+		}
+		Perceptron_simulation_launch = 0;
+	}
+}
+
+static int Perceptron_get_pcie_alignment(void)
+{
+#ifdef Perceptron_PCIE_ALIGNMENT
+	return ((Perceptron_PCIE_ALIGNMENT < 1) ? 16 : Perceptron_PCIE_ALIGNMENT);
+#else
+	return 16;
+#endif
+}
+
+static int Perceptron_check_aligned(const void *data)
+{
+	uintptr_t pointer = (uintptr_t) data;
+	int alignment = Perceptron_get_pcie_alignment();
+	return (pointer % alignment) ? 1 : 0;
+}
+
+static void *Perceptron_malloc_aligned(const size_t size)
+{
+	void *ptr;
+	int alignment = Perceptron_get_pcie_alignment();
+	posix_memalign(&ptr, alignment, size);
+	return ptr;
+}
+
+
+
+/*----------------------------------------------------------------------------*/
+/*---------------------------- Interface default -----------------------------*/
+/*----------------------------------------------------------------------------*/
+
+
+
+/**
+ * \brief Auxiliary function to evaluate expression for "PerceptronKernel.loopLength".
+ */
+int Perceptron_get_PerceptronKernel_loopLength( void )
+{
+	return 13;
+}
+
+#define CHECK_ERRORS_ST(ST, RET) if(!max_ok(ST->errors)) { if(max_config_get_bool(MAX_CONFIG_STATIC_INTERFACE_ABORT_ON_ERROR)) { fprintf(stderr, "%s\n", max_errors_trace(ST->errors)); abort(); } set_error_and_free(max_errors_trace(ST->errors)); return RET; } 
+#define CHECK_NULL(VALUE, MESSAGE, RET) if(VALUE == NULL) { if (max_config_get_bool(MAX_CONFIG_STATIC_INTERFACE_ABORT_ON_ERROR)) { fprintf(stderr, "%s\n%s\n", (stored_error == NULL) ? "" : stored_error, MESSAGE); abort(); } set_error(MESSAGE); return RET; }
+
+ 
+typedef struct Perceptron_callback_stream {
+	uint8_t *user_ptr;
+	uint8_t *aligned_ptr;
+	size_t   size;
+	int      is_output;
+} Perceptron_callback_stream_t;
+
+typedef struct Perceptron_callback_data {
+	Perceptron_callback_stream_t stream[7]; 
+	int count;
+	int max_count;
+} Perceptron_callback_data_t;
+
+static void Perceptron_callback_internal(void *cb_data)
+{
+	Perceptron_callback_data_t *data = (Perceptron_callback_data_t*) cb_data;
+	for (int i = 0 ; i < data->count ; i++ ) {
+		Perceptron_callback_stream_t *s = &data->stream[i];
+		if (s->is_output && (s->size > 0)) {
+			memcpy(s->user_ptr, s->aligned_ptr, s->size);
+		}
+		free(s->aligned_ptr);
+	}
+	free(data);
+}
+
+static max_actions_t* Perceptron_convert_internal(
+	max_file_t *maxfile,
+	Perceptron_actions_t *interface_actions,
+	int  is_internal_call,
+	void (**callback_func)(void*),
+	void **callback_data)
+{
+	max_actions_t *actions = max_actions_init(maxfile, NULL);
+	if(actions == NULL) return NULL;
+
+#define CHECK_ERRORS if(!max_ok(actions->errors)) { set_error_and_free(max_errors_trace(actions->errors)); return NULL; } 
+
+	Perceptron_callback_data_t *cb_data = NULL;
+	int use_callback = (callback_func != NULL) && (callback_data != NULL);
+	if (use_callback) {
+		cb_data = malloc(sizeof(Perceptron_callback_data_t));
+		if (cb_data == NULL) {
+			fprintf(stderr, "Unable to allocate memory for stream callback data in function Perceptron_convert_internal\n");
+			return NULL;
+		}
+		cb_data->max_count = 7;
+		cb_data->count     = 0;
+		*callback_data     = cb_data;
+		*callback_func     = &Perceptron_callback_internal;
+	}
+
+	int64_t param_points = interface_actions->param_points;
+	
+	int32_t param_PerceptronKernel_loopLength = Perceptron_get_PerceptronKernel_loopLength(  );
+	
+	int64_t tmp_0 = (param_points * param_PerceptronKernel_loopLength);
+	
+	/* code for scalar PerceptronKernel.run_cycle_count */
+	uint64_t ticks_PerceptronKernel = tmp_0;
+	max_set_ticks(actions, "PerceptronKernel", tmp_0);
+	CHECK_ERRORS;
+	/* end of code for scalar PerceptronKernel.run_cycle_count*/
+	
+	/* code for scalar PerceptronKernel.points */
+	uint64_t inscalar_PerceptronKernel_points = param_points;
+	max_set_uint64t(actions, "PerceptronKernel", "points", inscalar_PerceptronKernel_points);
+	CHECK_ERRORS;
+	/* end of code for scalar PerceptronKernel.points*/
+	
+	int64_t tmp_3 = (param_points * 4);
+	
+	/* code for stream cls */
+	size_t instream_size_cls = tmp_3;
+	if (instream_size_cls > 0) {
+		const float *stream_ptr = interface_actions->instream_cls;
+		if (use_callback && (1 == Perceptron_check_aligned(interface_actions->instream_cls))) {
+			float *aligned_instream_cls = malloc(instream_size_cls);
+			if (aligned_instream_cls == NULL) {
+				max_report_error_slic(actions->errors, __FILE__, __LINE__, 526, "Failed to allocate aligned memory for stream 'cls'");
+				CHECK_ERRORS;
+			}
+			(&cb_data->stream[cb_data->count])->user_ptr    = (uint8_t*) interface_actions->instream_cls;
+			(&cb_data->stream[cb_data->count])->aligned_ptr = (uint8_t*) aligned_instream_cls;
+			(&cb_data->stream[cb_data->count])->size        = instream_size_cls;
+			(&cb_data->stream[cb_data->count])->is_output   = 0;
+			cb_data->count += 1;
+			memcpy(aligned_instream_cls, interface_actions->instream_cls, instream_size_cls);
+			stream_ptr = aligned_instream_cls;
+		}
+		max_queue_input(actions, "cls", stream_ptr, instream_size_cls);
+		CHECK_ERRORS;
+	}
+	/* end of code for stream cls */
+	
+	int64_t tmp_1 = (param_points * 4);
+	
+	/* code for stream x1 */
+	size_t instream_size_x1 = tmp_1;
+	if (instream_size_x1 > 0) {
+		const float *stream_ptr = interface_actions->instream_x1;
+		if (use_callback && (1 == Perceptron_check_aligned(interface_actions->instream_x1))) {
+			float *aligned_instream_x1 = malloc(instream_size_x1);
+			if (aligned_instream_x1 == NULL) {
+				max_report_error_slic(actions->errors, __FILE__, __LINE__, 526, "Failed to allocate aligned memory for stream 'x1'");
+				CHECK_ERRORS;
+			}
+			(&cb_data->stream[cb_data->count])->user_ptr    = (uint8_t*) interface_actions->instream_x1;
+			(&cb_data->stream[cb_data->count])->aligned_ptr = (uint8_t*) aligned_instream_x1;
+			(&cb_data->stream[cb_data->count])->size        = instream_size_x1;
+			(&cb_data->stream[cb_data->count])->is_output   = 0;
+			cb_data->count += 1;
+			memcpy(aligned_instream_x1, interface_actions->instream_x1, instream_size_x1);
+			stream_ptr = aligned_instream_x1;
+		}
+		max_queue_input(actions, "x1", stream_ptr, instream_size_x1);
+		CHECK_ERRORS;
+	}
+	/* end of code for stream x1 */
+	
+	int64_t tmp_2 = (param_points * 4);
+	
+	/* code for stream x2 */
+	size_t instream_size_x2 = tmp_2;
+	if (instream_size_x2 > 0) {
+		const float *stream_ptr = interface_actions->instream_x2;
+		if (use_callback && (1 == Perceptron_check_aligned(interface_actions->instream_x2))) {
+			float *aligned_instream_x2 = malloc(instream_size_x2);
+			if (aligned_instream_x2 == NULL) {
+				max_report_error_slic(actions->errors, __FILE__, __LINE__, 526, "Failed to allocate aligned memory for stream 'x2'");
+				CHECK_ERRORS;
+			}
+			(&cb_data->stream[cb_data->count])->user_ptr    = (uint8_t*) interface_actions->instream_x2;
+			(&cb_data->stream[cb_data->count])->aligned_ptr = (uint8_t*) aligned_instream_x2;
+			(&cb_data->stream[cb_data->count])->size        = instream_size_x2;
+			(&cb_data->stream[cb_data->count])->is_output   = 0;
+			cb_data->count += 1;
+			memcpy(aligned_instream_x2, interface_actions->instream_x2, instream_size_x2);
+			stream_ptr = aligned_instream_x2;
+		}
+		max_queue_input(actions, "x2", stream_ptr, instream_size_x2);
+		CHECK_ERRORS;
+	}
+	/* end of code for stream x2 */
+	
+	int64_t tmp_4 = (param_points * 4);
+	
+	/* code for stream y */
+	size_t instream_size_y = tmp_4;
+	if (instream_size_y > 0) {
+		const float *stream_ptr = interface_actions->instream_y;
+		if (use_callback && (1 == Perceptron_check_aligned(interface_actions->instream_y))) {
+			float *aligned_instream_y = malloc(instream_size_y);
+			if (aligned_instream_y == NULL) {
+				max_report_error_slic(actions->errors, __FILE__, __LINE__, 526, "Failed to allocate aligned memory for stream 'y'");
+				CHECK_ERRORS;
+			}
+			(&cb_data->stream[cb_data->count])->user_ptr    = (uint8_t*) interface_actions->instream_y;
+			(&cb_data->stream[cb_data->count])->aligned_ptr = (uint8_t*) aligned_instream_y;
+			(&cb_data->stream[cb_data->count])->size        = instream_size_y;
+			(&cb_data->stream[cb_data->count])->is_output   = 0;
+			cb_data->count += 1;
+			memcpy(aligned_instream_y, interface_actions->instream_y, instream_size_y);
+			stream_ptr = aligned_instream_y;
+		}
+		max_queue_input(actions, "y", stream_ptr, instream_size_y);
+		CHECK_ERRORS;
+	}
+	/* end of code for stream y */
+	
+	int64_t tmp_5 = (param_points * 4);
+	
+	/* code for stream w0 */
+	size_t outstream_size_w0 = tmp_5;
+	if (outstream_size_w0 > 0) {
+		float *stream_ptr = interface_actions->outstream_w0;
+		if (use_callback && (1 == Perceptron_check_aligned(interface_actions->outstream_w0))) {
+			float *aligned_outstream_w0 = malloc(outstream_size_w0);
+			if (aligned_outstream_w0 == NULL) {
+				max_report_error_slic(actions->errors, __FILE__, __LINE__, 526, "Failed to allocate aligned memory for stream 'w0'");
+				CHECK_ERRORS;
+			}
+			(&cb_data->stream[cb_data->count])->user_ptr    = (uint8_t*) interface_actions->outstream_w0;
+			(&cb_data->stream[cb_data->count])->aligned_ptr = (uint8_t*) aligned_outstream_w0;
+			(&cb_data->stream[cb_data->count])->size        = outstream_size_w0;
+			(&cb_data->stream[cb_data->count])->is_output   = 1;
+			cb_data->count += 1;
+			stream_ptr = aligned_outstream_w0;
+		}
+		max_queue_output(actions, "w0", stream_ptr, outstream_size_w0);
+		CHECK_ERRORS;
+	}
+	/* end of code for stream w0 */
+	
+	int64_t tmp_6 = (param_points * 4);
+	
+	/* code for stream w1 */
+	size_t outstream_size_w1 = tmp_6;
+	if (outstream_size_w1 > 0) {
+		float *stream_ptr = interface_actions->outstream_w1;
+		if (use_callback && (1 == Perceptron_check_aligned(interface_actions->outstream_w1))) {
+			float *aligned_outstream_w1 = malloc(outstream_size_w1);
+			if (aligned_outstream_w1 == NULL) {
+				max_report_error_slic(actions->errors, __FILE__, __LINE__, 526, "Failed to allocate aligned memory for stream 'w1'");
+				CHECK_ERRORS;
+			}
+			(&cb_data->stream[cb_data->count])->user_ptr    = (uint8_t*) interface_actions->outstream_w1;
+			(&cb_data->stream[cb_data->count])->aligned_ptr = (uint8_t*) aligned_outstream_w1;
+			(&cb_data->stream[cb_data->count])->size        = outstream_size_w1;
+			(&cb_data->stream[cb_data->count])->is_output   = 1;
+			cb_data->count += 1;
+			stream_ptr = aligned_outstream_w1;
+		}
+		max_queue_output(actions, "w1", stream_ptr, outstream_size_w1);
+		CHECK_ERRORS;
+	}
+	/* end of code for stream w1 */
+	
+	int64_t tmp_7 = (param_points * 4);
+	
+	/* code for stream w2 */
+	size_t outstream_size_w2 = tmp_7;
+	if (outstream_size_w2 > 0) {
+		float *stream_ptr = interface_actions->outstream_w2;
+		if (use_callback && (1 == Perceptron_check_aligned(interface_actions->outstream_w2))) {
+			float *aligned_outstream_w2 = malloc(outstream_size_w2);
+			if (aligned_outstream_w2 == NULL) {
+				max_report_error_slic(actions->errors, __FILE__, __LINE__, 526, "Failed to allocate aligned memory for stream 'w2'");
+				CHECK_ERRORS;
+			}
+			(&cb_data->stream[cb_data->count])->user_ptr    = (uint8_t*) interface_actions->outstream_w2;
+			(&cb_data->stream[cb_data->count])->aligned_ptr = (uint8_t*) aligned_outstream_w2;
+			(&cb_data->stream[cb_data->count])->size        = outstream_size_w2;
+			(&cb_data->stream[cb_data->count])->is_output   = 1;
+			cb_data->count += 1;
+			stream_ptr = aligned_outstream_w2;
+		}
+		max_queue_output(actions, "w2", stream_ptr, outstream_size_w2);
+		CHECK_ERRORS;
+	}
+	/* end of code for stream w2 */
+	
+	if (use_callback && cb_data->count == 0) {
+		*callback_data = NULL;
+		*callback_func = NULL;
+		free(cb_data);
+	}
+	return actions;
+#undef CHECK_ERRORS
+}
+
+void Perceptron(
+	int64_t param_points,
+	const float *instream_cls,
+	const float *instream_x1,
+	const float *instream_x2,
+	const float *instream_y,
+	float *outstream_w0,
+	float *outstream_w1,
+	float *outstream_w2)
+{
+	(void) pthread_once(&slic_bs_is_initialised, Perceptron_static_init);
+	CHECK_NULL(stored_maxfile, "Maxfile was not loaded", );
+	max_run_t *run = Perceptron_nonblock(param_points, instream_cls, instream_x1, instream_x2, instream_y, outstream_w0, outstream_w1, outstream_w2);
+	CHECK_NULL(run, "Unable to run actions", );
+	max_wait(run);
+}
+
+max_run_t *Perceptron_nonblock(
+	int64_t param_points,
+	const float *instream_cls,
+	const float *instream_x1,
+	const float *instream_x2,
+	const float *instream_y,
+	float *outstream_w0,
+	float *outstream_w1,
+	float *outstream_w2)
+{
+	Perceptron_actions_t interface_actions;
+	interface_actions.param_points = param_points;
+	interface_actions.instream_cls = instream_cls;
+	interface_actions.instream_x1 = instream_x1;
+	interface_actions.instream_x2 = instream_x2;
+	interface_actions.instream_y = instream_y;
+	interface_actions.outstream_w0 = outstream_w0;
+	interface_actions.outstream_w1 = outstream_w1;
+	interface_actions.outstream_w2 = outstream_w2;
+	(void) pthread_once(&slic_bs_is_initialised, Perceptron_static_init);
+	CHECK_NULL(stored_maxfile, "Maxfile was not loaded", NULL);
+	void (*cb_func)(void*) = NULL;
+	void  *cb_data         = NULL;
+	max_actions_t *actions = Perceptron_convert_internal(stored_maxfile, &interface_actions, 1, &cb_func, &cb_data);
+	CHECK_NULL(actions, "Unable to build actions", NULL);
+	max_validate(actions);
+	CHECK_ERRORS_ST(actions, NULL);
+	CHECK_ERRORS_ST(stored_engine, NULL);
+	max_run_t *run;
+	if (cb_func == NULL) {
+		run = max_run_nonblock(stored_engine, actions);
+	} else {
+		run = max_run_nonblock_with_cb(stored_engine, actions, cb_func, cb_data);
+	}
+	CHECK_NULL(run, "Unable to run actions", NULL);
+	CHECK_ERRORS_ST(actions, NULL);
+	max_actions_free(actions);
+	return run;
+}
+
+void Perceptron_run(
+	max_engine_t *engine,
+	Perceptron_actions_t *interface_actions)
+{
+	max_run_t *run = Perceptron_run_nonblock(engine, interface_actions);
+	CHECK_NULL(run, "Unable to run actions", );
+	max_wait(run);
+}
+
+max_run_t *Perceptron_run_nonblock(
+	max_engine_t *engine,
+	Perceptron_actions_t *interface_actions)
+{
+	max_file_t *maxfile = max_engine_get_max_file(engine); 
+	void (*cb_func)(void*) = NULL;
+	void  *cb_data         = NULL;
+	max_actions_t *actions = Perceptron_convert_internal(maxfile, interface_actions, 1, &cb_func, &cb_data);
+	CHECK_ERRORS_ST(actions, NULL);
+	max_run_t *run;
+	if (cb_func == NULL) {
+		run = max_run_nonblock(engine, actions);
+	} else {
+		run = max_run_nonblock_with_cb(engine, actions, cb_func, cb_data);
+	}
+	CHECK_NULL(run, "Unable to run actions", NULL);
+	max_actions_free(actions);
+	return run;
+}
+
+
+/**
+ * \brief Group run advanced static function for the interface 'default'.
+ * 
+ * \param [in] group Group to use.
+ * \param [in,out] interface_actions Actions to run.
+ *
+ * Run the actions on the first device available in the group.
+ */
+void Perceptron_run_group(max_group_t *group, Perceptron_actions_t *interface_actions)
+{
+	max_run_t *run = Perceptron_run_group_nonblock(group, interface_actions);
+	CHECK_NULL(run, "Unable to run actions", );
+	max_wait(run);
+}
+
+
+/**
+ * \brief Group run advanced static non-blocking function for the interface 'default'.
+ * 
+ *
+ * Schedule the actions to run on the first device available in the group and return immediately.
+ * The status of the run must be checked with ::max_wait. 
+ * Note that use of ::max_nowait is prohibited with non-blocking running on groups:
+ * see the ::max_run_group_nonblock documentation for more explanation.
+ *
+ * \param [in] group Group to use.
+ * \param [in] interface_actions Actions to run.
+ * \return A handle on the execution status of the actions, or NULL in case of error.
+ */
+max_run_t *Perceptron_run_group_nonblock(max_group_t *group, Perceptron_actions_t *interface_actions)
+{
+	max_file_t *maxfile = max_group_get_max_file(group);
+	max_actions_t *actions = Perceptron_convert_internal(maxfile, interface_actions, 1, NULL, NULL);
+	if(actions == NULL) return NULL;
+	if(!max_ok(actions->errors)) return NULL;
+	max_validate(actions);
+	max_run_t *run = max_run_group_nonblock(group, actions);
+	max_actions_free(actions);
+	return run;
+}
+
+
+/**
+ * \brief Array run advanced static function for the interface 'default'.
+ * 
+ * \param [in] engarray The array of devices to use.
+ * \param [in,out] interface_actions The array of actions to run.
+ *
+ * Run the array of actions on the array of engines.  The length of interface_actions
+ * must match the size of engarray.
+ */
+void Perceptron_run_array(max_engarray_t *engarray, Perceptron_actions_t *interface_actions[])
+{
+	max_run_t *run = Perceptron_run_array_nonblock(engarray, interface_actions);
+	CHECK_NULL(run, "Unable to run actions", );
+	max_wait(run);
+}
+
+
+/**
+ * \brief Array run advanced static non-blocking function for the interface 'default'.
+ * 
+ *
+ * Schedule to run the array of actions on the array of engines, and return immediately.
+ * The length of interface_actions must match the size of engarray.
+ * The status of the run can be checked either by ::max_wait or ::max_nowait;
+ * note that one of these *must* be called, so that associated memory can be released.
+ *
+ * \param [in] engarray The array of devices to use.
+ * \param [in] interface_actions The array of actions to run.
+ * \return A handle on the execution status of the actions, or NULL in case of error.
+ */
+max_run_t *Perceptron_run_array_nonblock(max_engarray_t *engarray, Perceptron_actions_t *interface_actions[])
+{
+	max_file_t *maxfile = max_engarray_get_max_file(engarray, 0);
+	int i;
+	max_actarray_t *actarray = max_actarray_init(maxfile, engarray->size);
+	if (actarray == NULL) return NULL;
+	max_actions_t **arr_actions = malloc(engarray->size * sizeof(max_actions_t*));
+	for ( i = 0 ; i < actarray->size; i++ ) {
+		max_actions_t *actions = Perceptron_convert_internal(maxfile, interface_actions[i], 1, NULL, NULL);
+		if (actions == NULL) return NULL;
+		arr_actions[i] = actions;
+		max_set_action(actarray, i, actions);
+	}
+	max_run_t *run = max_run_array_nonblock(engarray, actarray);
+	for ( i = 0 ; i < actarray->size ; i++ ) { max_actions_free(arr_actions[i]); }
+	max_actarray_free(actarray);
+	free(arr_actions);
+	return run;
+}
+
+
+/**
+ * \brief Converts a static-interface action struct into a dynamic-interface max_actions_t struct.
+ *
+ * Note that this is an internal utility function used by other functions in the static interface.
+ *
+ * \param [in] maxfile The maxfile to use.
+ * \param [in] interface_actions The interface-specific actions to run.
+ * \return The dynamic-interface actions to run, or NULL in case of error.
+ */
+max_actions_t* Perceptron_convert(max_file_t *maxfile, Perceptron_actions_t *interface_actions)
+{
+	return Perceptron_convert_internal(maxfile, interface_actions, 0, NULL, NULL);
+}
+
+#undef CHECK_ERRORS_ST
+#undef CHECK_NULL
+
+
+
+#endif /* SLIC_USE_DEFINITIONS */
+
+#ifdef SLIC_DYNAMIC_CODE
+SLIC_MODE_START(default)	
+SLIC_PARAMETER_UINT64(int64_t, points, param_points)	
+SLIC_AUTO_LOOP_OFFSET(int32_t, PerceptronKernel, loopLength, param_PerceptronKernel_loopLength)	
+SLIC_TEMP_VAR(int64_t tmp_0 = (param_points * param_PerceptronKernel_loopLength);)	
+SLIC_SET_TICKS(PerceptronKernel, tmp_0)	
+SLIC_SCALAR_UINT64(PerceptronKernel, points, param_points)	
+SLIC_TEMP_VAR(int64_t tmp_3 = (param_points * 4);)	
+SLIC_STREAM(cls, tmp_3)	
+SLIC_TEMP_VAR(int64_t tmp_1 = (param_points * 4);)	
+SLIC_STREAM(x1, tmp_1)	
+SLIC_TEMP_VAR(int64_t tmp_2 = (param_points * 4);)	
+SLIC_STREAM(x2, tmp_2)	
+SLIC_TEMP_VAR(int64_t tmp_4 = (param_points * 4);)	
+SLIC_STREAM(y, tmp_4)	
+SLIC_TEMP_VAR(int64_t tmp_5 = (param_points * 4);)	
+SLIC_STREAM(w0, tmp_5)	
+SLIC_TEMP_VAR(int64_t tmp_6 = (param_points * 4);)	
+SLIC_STREAM(w1, tmp_6)	
+SLIC_TEMP_VAR(int64_t tmp_7 = (param_points * 4);)	
+SLIC_STREAM(w2, tmp_7)	
+SLIC_MODE_END(default)
+
+#endif /* SLIC_DYNAMIC_CODE */
+
+#ifdef SKIN_META_DATA
+PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+PG1h
+eGZpbGUgZm9ybWF0LXZlcnNpb249IjIwMTIwMjAwIiBoZWFkZXI9IlBlcmNlcHRyb24uaCIgbmFt
+ZT0iUGVyY2VwdHJvbiI+PGNvbnN0YW50IG5hbWU9IlBDSUVfQUxJR05NRU5UIiB0eXBlPSJsb25n
+IiB2YWx1ZT0iMTYiLz48ZW5naW5lbW9kZSBuYW1lPSJkZWZhdWx0Ij48ZnVuY3Rpb24gbmFtZT0i
+UGVyY2VwdHJvbiIgcmV0dXJuLXZhbHVlPSJ2b2lkIj48c2NhbGFyIGRlc2M9IkludGVyZmFjZSBQ
+YXJhbWV0ZXIgJnF1b3Q7cG9pbnRzJnF1b3Q7LiIgZGlyZWN0aW9uPSJJbnB1dCIgbmFtZT0icGFy
+YW1fcG9pbnRzIiB0eXBlPSJpbnQ2NF90Ii8+PGFycmF5IGRlc2M9IlRoZSBzdHJlYW0gc2hvdWxk
+IGJlIG9mIHNpemUgKHBhcmFtX3BvaW50cyAqIDQpIGJ5dGVzLiIgZGlyZWN0aW9uPSJJbnB1dCIg
+bmFtZT0iaW5zdHJlYW1fY2xzIiBzaXplPSIocGFyYW1fcG9pbnRzICogNCkiIHRyYW5zcG9zZT0i
+dHJ1ZSIgdHlwZT0iZmxvYXQiPjxkaW1lbnNpb24gaW5kZXg9IjAiPjxsZW5ndGg+PGZ1bmN0aW9u
+Q2FsbD48bnVtQmluYXJ5T3BlcmF0b3Igb3BlcmF0b3I9Ii8iIHZhbHVlPSIoKHBhcmFtX3BvaW50
+cyAqIDQpIC8gNCkiPjxmdW5jdGlvbkNhbGw+PG51bUJpbmFyeU9wZXJhdG9yIG9wZXJhdG9yPSIq
+IiB2YWx1ZT0iKHBhcmFtX3BvaW50cyAqIDQpIj48dXNlclBhcmFtIHZhbHVlPSJwYXJhbV9wb2lu
+dHMiLz48Y29uc3RhbnRWYWx1ZSB2YWx1ZT0iNCIvPjwvbnVtQmluYXJ5T3BlcmF0b3I+PC9mdW5j
+dGlvbkNhbGw+PGNvbnN0YW50VmFsdWUgdmFsdWU9IjQiLz48L251bUJpbmFyeU9wZXJhdG9yPjwv
+ZnVuY3Rpb25DYWxsPjwvbGVuZ3RoPjwvZGltZW5zaW9uPjwvYXJyYXk+PGFycmF5IGRlc2M9IlRo
+ZSBzdHJlYW0gc2hvdWxkIGJlIG9mIHNpemUgKHBhcmFtX3BvaW50cyAqIDQpIGJ5dGVzLiIgZGly
+ZWN0aW9uPSJJbnB1dCIgbmFtZT0iaW5zdHJlYW1feDEiIHNpemU9IihwYXJhbV9wb2ludHMgKiA0
+KSIgdHJhbnNwb3NlPSJ0cnVlIiB0eXBlPSJmbG9hdCI+PGRpbWVuc2lvbiBpbmRleD0iMCI+PGxl
+bmd0aD48ZnVuY3Rpb25DYWxsPjxudW1CaW5hcnlPcGVyYXRvciBvcGVyYXRvcj0iLyIgdmFsdWU9
+IigocGFyYW1fcG9pbnRzICogNCkgLyA0KSI+PGZ1bmN0aW9uQ2FsbD48bnVtQmluYXJ5T3BlcmF0
+b3Igb3BlcmF0b3I9IioiIHZhbHVlPSIocGFyYW1fcG9pbnRzICogNCkiPjx1c2VyUGFyYW0gdmFs
+dWU9InBhcmFtX3BvaW50cyIvPjxjb25zdGFudFZhbHVlIHZhbHVlPSI0Ii8+PC9udW1CaW5hcnlP
+cGVyYXRvcj48L2Z1bmN0aW9uQ2FsbD48Y29uc3RhbnRWYWx1ZSB2YWx1ZT0iNCIvPjwvbnVtQmlu
+YXJ5T3BlcmF0b3I+PC9mdW5jdGlvbkNhbGw+PC9sZW5ndGg+PC9kaW1lbnNpb24+PC9hcnJheT48
+YXJyYXkgZGVzYz0iVGhlIHN0cmVhbSBzaG91bGQgYmUgb2Ygc2l6ZSAocGFyYW1fcG9pbnRzICog
+NCkgYnl0ZXMuIiBkaXJlY3Rpb249IklucHV0IiBuYW1lPSJpbnN0cmVhbV94MiIgc2l6ZT0iKHBh
+cmFtX3BvaW50cyAqIDQpIiB0cmFuc3Bvc2U9InRydWUiIHR5cGU9ImZsb2F0Ij48ZGltZW5zaW9u
+IGluZGV4PSIwIj48bGVuZ3RoPjxmdW5jdGlvbkNhbGw+PG51bUJpbmFyeU9wZXJhdG9yIG9wZXJh
+dG9yPSIvIiB2YWx1ZT0iKChwYXJhbV9wb2ludHMgKiA0KSAvIDQpIj48ZnVuY3Rpb25DYWxsPjxu
+dW1CaW5hcnlPcGVyYXRvciBvcGVyYXRvcj0iKiIgdmFsdWU9IihwYXJhbV9wb2ludHMgKiA0KSI+
+PHVzZXJQYXJhbSB2YWx1ZT0icGFyYW1fcG9pbnRzIi8+PGNvbnN0YW50VmFsdWUgdmFsdWU9IjQi
+Lz48L251bUJpbmFyeU9wZXJhdG9yPjwvZnVuY3Rpb25DYWxsPjxjb25zdGFudFZhbHVlIHZhbHVl
+PSI0Ii8+PC9udW1CaW5hcnlPcGVyYXRvcj48L2Z1bmN0aW9uQ2FsbD48L2xlbmd0aD48L2RpbWVu
+c2lvbj48L2FycmF5PjxhcnJheSBkZXNjPSJUaGUgc3RyZWFtIHNob3VsZCBiZSBvZiBzaXplIChw
+YXJhbV9wb2ludHMgKiA0KSBieXRlcy4iIGRpcmVjdGlvbj0iSW5wdXQiIG5hbWU9Imluc3RyZWFt
+X3kiIHNpemU9IihwYXJhbV9wb2ludHMgKiA0KSIgdHJhbnNwb3NlPSJ0cnVlIiB0eXBlPSJmbG9h
+dCI+PGRpbWVuc2lvbiBpbmRleD0iMCI+PGxlbmd0aD48ZnVuY3Rpb25DYWxsPjxudW1CaW5hcnlP
+cGVyYXRvciBvcGVyYXRvcj0iLyIgdmFsdWU9IigocGFyYW1fcG9pbnRzICogNCkgLyA0KSI+PGZ1
+bmN0aW9uQ2FsbD48bnVtQmluYXJ5T3BlcmF0b3Igb3BlcmF0b3I9IioiIHZhbHVlPSIocGFyYW1f
+cG9pbnRzICogNCkiPjx1c2VyUGFyYW0gdmFsdWU9InBhcmFtX3BvaW50cyIvPjxjb25zdGFudFZh
+bHVlIHZhbHVlPSI0Ii8+PC9udW1CaW5hcnlPcGVyYXRvcj48L2Z1bmN0aW9uQ2FsbD48Y29uc3Rh
+bnRWYWx1ZSB2YWx1ZT0iNCIvPjwvbnVtQmluYXJ5T3BlcmF0b3I+PC9mdW5jdGlvbkNhbGw+PC9s
+ZW5ndGg+PC9kaW1lbnNpb24+PC9hcnJheT48YXJyYXkgZGVzYz0iVGhlIHN0cmVhbSBzaG91bGQg
+YmUgb2Ygc2l6ZSAocGFyYW1fcG9pbnRzICogNCkgYnl0ZXMuIiBkaXJlY3Rpb249Ik91dHB1dCIg
+bmFtZT0ib3V0c3RyZWFtX3cwIiBzaXplPSIocGFyYW1fcG9pbnRzICogNCkiIHRyYW5zcG9zZT0i
+dHJ1ZSIgdHlwZT0iZmxvYXQiPjxkaW1lbnNpb24gaW5kZXg9IjAiPjxsZW5ndGg+PGZ1bmN0aW9u
+Q2FsbD48bnVtQmluYXJ5T3BlcmF0b3Igb3BlcmF0b3I9Ii8iIHZhbHVlPSIoKHBhcmFtX3BvaW50
+cyAqIDQpIC8gNCkiPjxmdW5jdGlvbkNhbGw+PG51bUJpbmFyeU9wZXJhdG9yIG9wZXJhdG9yPSIq
+IiB2YWx1ZT0iKHBhcmFtX3BvaW50cyAqIDQpIj48dXNlclBhcmFtIHZhbHVlPSJwYXJhbV9wb2lu
+dHMiLz48Y29uc3RhbnRWYWx1ZSB2YWx1ZT0iNCIvPjwvbnVtQmluYXJ5T3BlcmF0b3I+PC9mdW5j
+dGlvbkNhbGw+PGNvbnN0YW50VmFsdWUgdmFsdWU9IjQiLz48L251bUJpbmFyeU9wZXJhdG9yPjwv
+ZnVuY3Rpb25DYWxsPjwvbGVuZ3RoPjwvZGltZW5zaW9uPjwvYXJyYXk+PGFycmF5IGRlc2M9IlRo
+ZSBzdHJlYW0gc2hvdWxkIGJlIG9mIHNpemUgKHBhcmFtX3BvaW50cyAqIDQpIGJ5dGVzLiIgZGly
+ZWN0aW9uPSJPdXRwdXQiIG5hbWU9Im91dHN0cmVhbV93MSIgc2l6ZT0iKHBhcmFtX3BvaW50cyAq
+IDQpIiB0cmFuc3Bvc2U9InRydWUiIHR5cGU9ImZsb2F0Ij48ZGltZW5zaW9uIGluZGV4PSIwIj48
+bGVuZ3RoPjxmdW5jdGlvbkNhbGw+PG51bUJpbmFyeU9wZXJhdG9yIG9wZXJhdG9yPSIvIiB2YWx1
+ZT0iKChwYXJhbV9wb2ludHMgKiA0KSAvIDQpIj48ZnVuY3Rpb25DYWxsPjxudW1CaW5hcnlPcGVy
+YXRvciBvcGVyYXRvcj0iKiIgdmFsdWU9IihwYXJhbV9wb2ludHMgKiA0KSI+PHVzZXJQYXJhbSB2
+YWx1ZT0icGFyYW1fcG9pbnRzIi8+PGNvbnN0YW50VmFsdWUgdmFsdWU9IjQiLz48L251bUJpbmFy
+eU9wZXJhdG9yPjwvZnVuY3Rpb25DYWxsPjxjb25zdGFudFZhbHVlIHZhbHVlPSI0Ii8+PC9udW1C
+aW5hcnlPcGVyYXRvcj48L2Z1bmN0aW9uQ2FsbD48L2xlbmd0aD48L2RpbWVuc2lvbj48L2FycmF5
+PjxhcnJheSBkZXNjPSJUaGUgc3RyZWFtIHNob3VsZCBiZSBvZiBzaXplIChwYXJhbV9wb2ludHMg
+KiA0KSBieXRlcy4iIGRpcmVjdGlvbj0iT3V0cHV0IiBuYW1lPSJvdXRzdHJlYW1fdzIiIHNpemU9
+IihwYXJhbV9wb2ludHMgKiA0KSIgdHJhbnNwb3NlPSJ0cnVlIiB0eXBlPSJmbG9hdCI+PGRpbWVu
+c2lvbiBpbmRleD0iMCI+PGxlbmd0aD48ZnVuY3Rpb25DYWxsPjxudW1CaW5hcnlPcGVyYXRvciBv
+cGVyYXRvcj0iLyIgdmFsdWU9IigocGFyYW1fcG9pbnRzICogNCkgLyA0KSI+PGZ1bmN0aW9uQ2Fs
+bD48bnVtQmluYXJ5T3BlcmF0b3Igb3BlcmF0b3I9IioiIHZhbHVlPSIocGFyYW1fcG9pbnRzICog
+NCkiPjx1c2VyUGFyYW0gdmFsdWU9InBhcmFtX3BvaW50cyIvPjxjb25zdGFudFZhbHVlIHZhbHVl
+PSI0Ii8+PC9udW1CaW5hcnlPcGVyYXRvcj48L2Z1bmN0aW9uQ2FsbD48Y29uc3RhbnRWYWx1ZSB2
+YWx1ZT0iNCIvPjwvbnVtQmluYXJ5T3BlcmF0b3I+PC9mdW5jdGlvbkNhbGw+PC9sZW5ndGg+PC9k
+aW1lbnNpb24+PC9hcnJheT48L2Z1bmN0aW9uPjwvZW5naW5lbW9kZT48L21heGZpbGU+
+#endif /* SKIN_META_DATA */
+
+#ifdef SLIC_B64_DEFINITIONS
+I2luY2x1ZGUgPHN0ZGlvLmg+CiNpbmNsdWRlIDxtYXRoLmg+CiNpbmNsdWRlIDxwdGhyZWFkLmg+
+CiNpbmNsdWRlIDxzdHJpbmcuaD4KI2luY2x1ZGUgPHVuaXN0ZC5oPgojaW5jbHVkZSA8c3RkbGli
+Lmg+CnN0YXRpYyBtYXhfZmlsZV90ICpzdG9yZWRfbWF4ZmlsZSA9IE5VTEw7CnN0YXRpYyBtYXhf
+ZW5naW5lX3QgKnN0b3JlZF9lbmdpbmUgPSBOVUxMOwpzdGF0aWMgY2hhciAqc3RvcmVkX2Vycm9y
+ID0gTlVMTDsKc3RhdGljIGludCBzdG9yZWRfaGFzX2Vycm9yID0gMDsKc3RhdGljIHB0aHJlYWRf
+b25jZV90IHNsaWNfYnNfaXNfaW5pdGlhbGlzZWQgPSBQVEhSRUFEX09OQ0VfSU5JVDsKCnN0YXRp
+YyB2b2lkIHNldF9lcnJvcihjb25zdCBjaGFyICplcnJvcl9zdHIpCnsKCXN0b3JlZF9oYXNfZXJy
+b3IgPSAxOyAKCWlmKHN0b3JlZF9lcnJvciA9PSBOVUxMKSB7CgkJc3RvcmVkX2Vycm9yID0gc3Ry
+ZHVwKGVycm9yX3N0cik7Cgl9IGVsc2UgewoJCWNoYXIgKm5lcnIgPSBtYWxsb2Moc3RybGVuKHN0
+b3JlZF9lcnJvcikgKyBzdHJsZW4oZXJyb3Jfc3RyKSArIDIpOwoJCXNwcmludGYobmVyciwgIiVz
+XG4lcyIsIHN0b3JlZF9lcnJvciwgZXJyb3Jfc3RyKTsKCQlmcmVlKHN0b3JlZF9lcnJvcik7CgkJ
+c3RvcmVkX2Vycm9yID0gbmVycjsKCX0KfQpzdGF0aWMgdm9pZCBzZXRfZXJyb3JfYW5kX2ZyZWUo
+Y2hhciAqZXJyb3Jfc3RyKXsKCXNldF9lcnJvcihlcnJvcl9zdHIpOwoJZnJlZShlcnJvcl9zdHIp
+Owp9CmludCBQZXJjZXB0cm9uX2hhc19lcnJvcnModm9pZCkKewlyZXR1cm4gc3RvcmVkX2hhc19l
+cnJvcjsgfQpjb25zdCBjaGFyKiBQZXJjZXB0cm9uX2dldF9lcnJvcnModm9pZCkKewlyZXR1cm4g
+c3RvcmVkX2Vycm9yOyB9CnZvaWQgUGVyY2VwdHJvbl9jbGVhcl9lcnJvcnModm9pZCkKewoJZnJl
+ZShzdG9yZWRfZXJyb3IpOwoJc3RvcmVkX2Vycm9yID0gTlVMTDsKCXN0b3JlZF9oYXNfZXJyb3Ig
+PSAwOwp9CgpzdGF0aWMgY2hhciBQZXJjZXB0cm9uX3VzZV9zaW11bGF0aW9uWzE2XTsKc3RhdGlj
+IHZvaWQgUGVyY2VwdHJvbl9kZWZfdXNlX3NpbXVsYXRpb24odm9pZCkKewoJbG9uZyBwaWQgPSAo
+KGxvbmcpIGdldHBpZCgpKSAlIDEwMDAwMDsKCXNucHJpbnRmKFBlcmNlcHRyb25fdXNlX3NpbXVs
+YXRpb24sIDE2LCAiUGVyY2VwdHJfJTA1bGRfIiwgcGlkKTsKfQpzdGF0aWMgY29uc3QgY2hhciAq
+UGVyY2VwdHJvbl9jaGVja191c2Vfc2ltdWxhdGlvbih2b2lkKQp7CglQZXJjZXB0cm9uX2RlZl91
+c2Vfc2ltdWxhdGlvbigpOwoJY29uc3QgY2hhciAqdXNlX3NpbSA9IG1heF9jb25maWdfZ2V0X3N0
+cmluZyhNQVhfQ09ORklHX1VTRV9TSU1VTEFUSU9OKTsKCWlmICh1c2Vfc2ltID09IE5VTEwpIHsK
+CQl1c2Vfc2ltID0gUGVyY2VwdHJvbl91c2Vfc2ltdWxhdGlvbjsKCQltYXhfY29uZmlnX3NldF9z
+dHJpbmcoTUFYX0NPTkZJR19VU0VfU0lNVUxBVElPTiwgdXNlX3NpbSk7Cgl9CglyZXR1cm4gdXNl
+X3NpbTsKfQoKc3RhdGljIGludCBQZXJjZXB0cm9uX3NpbXVsYXRpb25fbGF1bmNoID0gMDsKaW50
+IFBlcmNlcHRyb25fc2ltdWxhdG9yX3N0YXJ0KHZvaWQpCnsKCWludCByZXR2YWwgPSAwOwoJY29u
+c3QgY2hhciAqdXNlX3NpbSA9IFBlcmNlcHRyb25fY2hlY2tfdXNlX3NpbXVsYXRpb24oKTsKCWNo
+YXIgYnVmZlsxMDI0XTsKCXNucHJpbnRmKGJ1ZmYsIDEwMjQsICJQQVRIPXNpbXV0aWxzOiRQQVRI
+IG1heGNvbXBpbGVyc2ltIC1kIDEgLW4gJXMgLWMgTUFYMzQyNEEgLVMgc2ltdXRpbHMgcmVzdGFy
+dCIsIHVzZV9zaW0pOwoJRklMRSAqcGlwZV9mcCA9IHBvcGVuKGJ1ZmYsICJyIik7CglpZiAocGlw
+ZV9mcCA9PSBOVUxMKSB7CgkJc3RybmNhdChidWZmLCAiIDogZmFpbGVkIHRvIGV4ZWN1dGUuIiwg
+KDEwMjQgLSBzdHJsZW4oYnVmZikpKTsKCQlzZXRfZXJyb3IoYnVmZik7CgkJcmV0dXJuIC0xOwoJ
+fQoJd2hpbGUgKGZnZXRzKGJ1ZmYsIDEwMjQsIHBpcGVfZnApICE9IE5VTEwpIHsKCQkvKiBVbmNv
+bW1lbnQgdGhpcyB0byBnZXQgc2ltdWxhdG9yIGNvbW1hbmQgb3V0cHV0ICovCgkJLyogZnByaW50
+ZihzdGRlcnIsIGJ1ZmYpOyAqLwoJCWlmIChzdHJzdHIoYnVmZiwgIkVycm9yIikpIHsKCQkJc2V0
+X2Vycm9yKGJ1ZmYpOwoJCQlyZXR2YWwgPSAtMTsKCQl9Cgl9CglwY2xvc2UocGlwZV9mcCk7Cgly
+ZXR1cm4gcmV0dmFsOwp9CgppbnQgUGVyY2VwdHJvbl9zaW11bGF0b3Jfc3RvcCh2b2lkKQp7Cglj
+b25zdCBjaGFyICp1c2Vfc2ltID0gUGVyY2VwdHJvbl9jaGVja191c2Vfc2ltdWxhdGlvbigpOwoJ
+Y2hhciBidWZmWzEwMjRdOwoJc25wcmludGYoYnVmZiwgMTAyNCwgIlBBVEg9c2ltdXRpbHM6JFBB
+VEggbWF4Y29tcGlsZXJzaW0gLWQgMSAtbiAlcyAtYyBNQVgzNDI0QSAtUyBzaW11dGlscyBzdG9w
+IiwgdXNlX3NpbSk7CglGSUxFICpwaXBlX2ZwID0gcG9wZW4oYnVmZiwgInIiKTsKCWlmIChwaXBl
+X2ZwID09IE5VTEwpIHsKCQlzdHJuY2F0KGJ1ZmYsICIgOiBmYWlsZWQgdG8gZXhlY3V0ZS4iLCAo
+MTAyNCAtIHN0cmxlbihidWZmKSkpOwoJCXNldF9lcnJvcihidWZmKTsKCQlyZXR1cm4gLTE7Cgl9
+Cgl3aGlsZSAoZmdldHMoYnVmZiwgMTAyNCwgcGlwZV9mcCkgIT0gTlVMTCkgewoJCS8qIFVuY29t
+bWVudCB0aGlzIHRvIGdldCBzaW11bGF0b3IgY29tbWFuZCBvdXRwdXQgKi8KCQkvKiBmcHJpbnRm
+KHN0ZGVyciwgYnVmZik7ICovCgkJOwoJfQoJcGNsb3NlKHBpcGVfZnApOwoJcmV0dXJuIDA7Cn0K
+CnN0YXRpYyB2b2lkIFBlcmNlcHRyb25fc3RhdGljX2luaXQodm9pZCkgCnsKCXN0b3JlZF9tYXhm
+aWxlID0gUGVyY2VwdHJvbl9pbml0KCk7CglpZiAoc3RvcmVkX21heGZpbGUgPT0gTlVMTCB8fCAh
+bWF4X29rKHN0b3JlZF9tYXhmaWxlLT5lcnJvcnMpKSB7CgkJc3RvcmVkX21heGZpbGUgPSBOVUxM
+OwoJCWlmKG1heF9jb25maWdfZ2V0X2Jvb2woTUFYX0NPTkZJR19TVEFUSUNfSU5URVJGQUNFX0FC
+T1JUX09OX0VSUk9SKSkgYWJvcnQoKTsKCQllbHNlIHsgc2V0X2Vycm9yKCJVbmFibGUgdG8gbG9h
+ZCBtYXhmaWxlIik7IHJldHVybjsgfQoJfQoJaWYoIW1heF9vayhtYXhfZ2xvYmFsX2Vycm9ycygp
+KSkgewoJCXNldF9lcnJvcl9hbmRfZnJlZShtYXhfZXJyb3JzX3RyYWNlKG1heF9nbG9iYWxfZXJy
+b3JzKCkpKTsKCQlyZXR1cm47Cgl9CglpZighbWF4X2NvbmZpZ19nZXRfYm9vbChNQVhfQ09ORklH
+X1NUQVRJQ19JTlRFUkZBQ0VfQUJPUlRfT05fRVJST1IpKQoJCW1heF9lcnJvcnNfbW9kZShzdG9y
+ZWRfbWF4ZmlsZS0+ZXJyb3JzLCAwKTsKCXRpbWVfdCB0aW1lb3V0X3ByZXZpb3VzID0gbWF4X2xv
+YWRfdGltZW91dChzdG9yZWRfbWF4ZmlsZSwgMzApOwoJY29uc3QgY2hhciAqdXNlX3NpbSA9IFBl
+cmNlcHRyb25fY2hlY2tfdXNlX3NpbXVsYXRpb24oKTsKCWlmIChtYXhfcGluZ19kYWVtb24oc3Rv
+cmVkX21heGZpbGUsIHVzZV9zaW0pID09IDApIHsKCQlpbnQgc2ltX3N0YXQgPSBQZXJjZXB0cm9u
+X3NpbXVsYXRvcl9zdGFydCgpOwoJCWlmICgoc2ltX3N0YXQgPT0gMCkgJiYgKG1heF9waW5nX2Rh
+ZW1vbihzdG9yZWRfbWF4ZmlsZSwgdXNlX3NpbSkgPT0gMSkpIHsKCQkJUGVyY2VwdHJvbl9zaW11
+bGF0aW9uX2xhdW5jaCA9IDE7CgkJfSBlbHNlIHsKCQkJc2V0X2Vycm9yKCJFcnJvcjogQW4gZXJy
+b3Igb2NjdXJyZWQgd2hpbGUgdHJ5aW5nIHRvIHN0YXJ0IHRoZSBzaW11bGF0aW9uIGluZnJhc3Ry
+dWN0dXJlIGF1dG9tYXRpY2FsbHkuIik7CgkJCXNldF9lcnJvcigiRXJyb3I6IENoZWNrIHRoYXQg
+J3VzZV9zaW11bGF0aW9uPTxzaW11bGF0b3JfbmFtZT4nIGlzIHNldCBjb3JyZWN0bHkgaW4geW91
+ciBTTGlDIGNvbmZpZ3VyYXRpb24iKTsKCQkJc2V0X2Vycm9yKCJFcnJvcjogYW5kIHRoYXQgdGhl
+IGFzc29jaWF0ZWQgc2ltdWxhdGVkIHN5c3RlbSBkYWVtb24gaXMgcnVubmluZy4iKTsKCQkJbWF4
+X2ZpbGVfZnJlZShzdG9yZWRfbWF4ZmlsZSk7CgkJCXN0b3JlZF9tYXhmaWxlID0gTlVMTDsKCQkJ
+cmV0dXJuOwoJCX0KCX0KCXN0b3JlZF9lbmdpbmUgPSBtYXhfbG9hZChzdG9yZWRfbWF4ZmlsZSwg
+IioiKTsKCWlmICghbWF4X29rKHN0b3JlZF9tYXhmaWxlLT5lcnJvcnMpKSB7CgkJaWYobWF4X2Nv
+bmZpZ19nZXRfYm9vbChNQVhfQ09ORklHX1NUQVRJQ19JTlRFUkZBQ0VfQUJPUlRfT05fRVJST1Ip
+KSB7CgkJCWZwcmludGYoc3RkZXJyLCAiXG5VbmFibGUgdG8gbG9hZCBlbmdpbmU6IGFib3J0aW5n
+IG5vdy5cblxuIik7CgkJCWZmbHVzaChzdGRlcnIpOwoJCQlhYm9ydCgpOwoJCX0gZWxzZSB7CgkJ
+CXNldF9lcnJvcl9hbmRfZnJlZShtYXhfZXJyb3JzX3RyYWNlKHN0b3JlZF9tYXhmaWxlLT5lcnJv
+cnMpKTsKCQkJbWF4X2ZpbGVfZnJlZShzdG9yZWRfbWF4ZmlsZSk7CgkJCXN0b3JlZF9tYXhmaWxl
+ID0gTlVMTDsKCQkJcmV0dXJuOwoJCX0gCgl9IAoJbWF4X2xvYWRfdGltZW91dChzdG9yZWRfbWF4
+ZmlsZSwgdGltZW91dF9wcmV2aW91cyk7Cn0Kdm9pZCBQZXJjZXB0cm9uX2ZyZWUodm9pZCkKewoJ
+aWYgKHN0b3JlZF9lbmdpbmUgIT0gTlVMTCkgewoJCW1heF91bmxvYWQoc3RvcmVkX2VuZ2luZSk7
+CgkJc3RvcmVkX2VuZ2luZSA9IE5VTEw7Cgl9CglpZiAoc3RvcmVkX21heGZpbGUgIT0gTlVMTCkg
+ewoJCW1heF9maWxlX2ZyZWUoc3RvcmVkX21heGZpbGUpOwoJCXN0b3JlZF9tYXhmaWxlID0gTlVM
+TDsKCX0KCWlmIChzdG9yZWRfZXJyb3IgIT0gTlVMTCkgewoJCWZyZWUoc3RvcmVkX2Vycm9yKTsK
+CQlzdG9yZWRfZXJyb3IgPSBOVUxMOwoJfQoJaWYgKFBlcmNlcHRyb25fc2ltdWxhdGlvbl9sYXVu
+Y2ggPT0gMSkgewoJCWludCBzaW1fc3RhdCA9IFBlcmNlcHRyb25fc2ltdWxhdG9yX3N0b3AoKTsK
+CQlpZiAoc2ltX3N0YXQgIT0gMCApIHsKCQkJZnByaW50ZihzdGRlcnIsICJFcnJvciBzdG9wcGlu
+ZyBzaW11bGF0b3IuIik7CgkJfQoJCVBlcmNlcHRyb25fc2ltdWxhdGlvbl9sYXVuY2ggPSAwOwoJ
+fQp9CgpzdGF0aWMgaW50IFBlcmNlcHRyb25fZ2V0X3BjaWVfYWxpZ25tZW50KHZvaWQpCnsKI2lm
+ZGVmIFBlcmNlcHRyb25fUENJRV9BTElHTk1FTlQKCXJldHVybiAoKFBlcmNlcHRyb25fUENJRV9B
+TElHTk1FTlQgPCAxKSA/IDE2IDogUGVyY2VwdHJvbl9QQ0lFX0FMSUdOTUVOVCk7CiNlbHNlCgly
+ZXR1cm4gMTY7CiNlbmRpZgp9CgpzdGF0aWMgaW50IFBlcmNlcHRyb25fY2hlY2tfYWxpZ25lZChj
+b25zdCB2b2lkICpkYXRhKQp7Cgl1aW50cHRyX3QgcG9pbnRlciA9ICh1aW50cHRyX3QpIGRhdGE7
+CglpbnQgYWxpZ25tZW50ID0gUGVyY2VwdHJvbl9nZXRfcGNpZV9hbGlnbm1lbnQoKTsKCXJldHVy
+biAocG9pbnRlciAlIGFsaWdubWVudCkgPyAxIDogMDsKfQoKc3RhdGljIHZvaWQgKlBlcmNlcHRy
+b25fbWFsbG9jX2FsaWduZWQoY29uc3Qgc2l6ZV90IHNpemUpCnsKCXZvaWQgKnB0cjsKCWludCBh
+bGlnbm1lbnQgPSBQZXJjZXB0cm9uX2dldF9wY2llX2FsaWdubWVudCgpOwoJcG9zaXhfbWVtYWxp
+Z24oJnB0ciwgYWxpZ25tZW50LCBzaXplKTsKCXJldHVybiBwdHI7Cn0KCgoKLyotLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tKi8KLyotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tIEludGVyZmFjZSBkZWZh
+dWx0IC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tKi8KLyotLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+Ki8KCgoKLyoqCiAqIFxicmllZiBBdXhpbGlhcnkgZnVuY3Rpb24gdG8gZXZhbHVhdGUgZXhwcmVz
+c2lvbiBmb3IgIlBlcmNlcHRyb25LZXJuZWwubG9vcExlbmd0aCIuCiAqLwppbnQgUGVyY2VwdHJv
+bl9nZXRfUGVyY2VwdHJvbktlcm5lbF9sb29wTGVuZ3RoKCB2b2lkICkKewoJcmV0dXJuIDEzOwp9
+CgojZGVmaW5lIENIRUNLX0VSUk9SU19TVChTVCwgUkVUKSBpZighbWF4X29rKFNULT5lcnJvcnMp
+KSB7IGlmKG1heF9jb25maWdfZ2V0X2Jvb2woTUFYX0NPTkZJR19TVEFUSUNfSU5URVJGQUNFX0FC
+T1JUX09OX0VSUk9SKSkgeyBmcHJpbnRmKHN0ZGVyciwgIiVzXG4iLCBtYXhfZXJyb3JzX3RyYWNl
+KFNULT5lcnJvcnMpKTsgYWJvcnQoKTsgfSBzZXRfZXJyb3JfYW5kX2ZyZWUobWF4X2Vycm9yc190
+cmFjZShTVC0+ZXJyb3JzKSk7IHJldHVybiBSRVQ7IH0gCiNkZWZpbmUgQ0hFQ0tfTlVMTChWQUxV
+RSwgTUVTU0FHRSwgUkVUKSBpZihWQUxVRSA9PSBOVUxMKSB7IGlmIChtYXhfY29uZmlnX2dldF9i
+b29sKE1BWF9DT05GSUdfU1RBVElDX0lOVEVSRkFDRV9BQk9SVF9PTl9FUlJPUikpIHsgZnByaW50
+ZihzdGRlcnIsICIlc1xuJXNcbiIsIChzdG9yZWRfZXJyb3IgPT0gTlVMTCkgPyAiIiA6IHN0b3Jl
+ZF9lcnJvciwgTUVTU0FHRSk7IGFib3J0KCk7IH0gc2V0X2Vycm9yKE1FU1NBR0UpOyByZXR1cm4g
+UkVUOyB9CgogCnR5cGVkZWYgc3RydWN0IFBlcmNlcHRyb25fY2FsbGJhY2tfc3RyZWFtIHsKCXVp
+bnQ4X3QgKnVzZXJfcHRyOwoJdWludDhfdCAqYWxpZ25lZF9wdHI7CglzaXplX3QgICBzaXplOwoJ
+aW50ICAgICAgaXNfb3V0cHV0Owp9IFBlcmNlcHRyb25fY2FsbGJhY2tfc3RyZWFtX3Q7Cgp0eXBl
+ZGVmIHN0cnVjdCBQZXJjZXB0cm9uX2NhbGxiYWNrX2RhdGEgewoJUGVyY2VwdHJvbl9jYWxsYmFj
+a19zdHJlYW1fdCBzdHJlYW1bN107IAoJaW50IGNvdW50OwoJaW50IG1heF9jb3VudDsKfSBQZXJj
+ZXB0cm9uX2NhbGxiYWNrX2RhdGFfdDsKCnN0YXRpYyB2b2lkIFBlcmNlcHRyb25fY2FsbGJhY2tf
+aW50ZXJuYWwodm9pZCAqY2JfZGF0YSkKewoJUGVyY2VwdHJvbl9jYWxsYmFja19kYXRhX3QgKmRh
+dGEgPSAoUGVyY2VwdHJvbl9jYWxsYmFja19kYXRhX3QqKSBjYl9kYXRhOwoJZm9yIChpbnQgaSA9
+IDAgOyBpIDwgZGF0YS0+Y291bnQgOyBpKysgKSB7CgkJUGVyY2VwdHJvbl9jYWxsYmFja19zdHJl
+YW1fdCAqcyA9ICZkYXRhLT5zdHJlYW1baV07CgkJaWYgKHMtPmlzX291dHB1dCAmJiAocy0+c2l6
+ZSA+IDApKSB7CgkJCW1lbWNweShzLT51c2VyX3B0ciwgcy0+YWxpZ25lZF9wdHIsIHMtPnNpemUp
+OwoJCX0KCQlmcmVlKHMtPmFsaWduZWRfcHRyKTsKCX0KCWZyZWUoZGF0YSk7Cn0KCnN0YXRpYyBt
+YXhfYWN0aW9uc190KiBQZXJjZXB0cm9uX2NvbnZlcnRfaW50ZXJuYWwoCgltYXhfZmlsZV90ICpt
+YXhmaWxlLAoJUGVyY2VwdHJvbl9hY3Rpb25zX3QgKmludGVyZmFjZV9hY3Rpb25zLAoJaW50ICBp
+c19pbnRlcm5hbF9jYWxsLAoJdm9pZCAoKipjYWxsYmFja19mdW5jKSh2b2lkKiksCgl2b2lkICoq
+Y2FsbGJhY2tfZGF0YSkKewoJbWF4X2FjdGlvbnNfdCAqYWN0aW9ucyA9IG1heF9hY3Rpb25zX2lu
+aXQobWF4ZmlsZSwgTlVMTCk7CglpZihhY3Rpb25zID09IE5VTEwpIHJldHVybiBOVUxMOwoKI2Rl
+ZmluZSBDSEVDS19FUlJPUlMgaWYoIW1heF9vayhhY3Rpb25zLT5lcnJvcnMpKSB7IHNldF9lcnJv
+cl9hbmRfZnJlZShtYXhfZXJyb3JzX3RyYWNlKGFjdGlvbnMtPmVycm9ycykpOyByZXR1cm4gTlVM
+TDsgfSAKCglQZXJjZXB0cm9uX2NhbGxiYWNrX2RhdGFfdCAqY2JfZGF0YSA9IE5VTEw7CglpbnQg
+dXNlX2NhbGxiYWNrID0gKGNhbGxiYWNrX2Z1bmMgIT0gTlVMTCkgJiYgKGNhbGxiYWNrX2RhdGEg
+IT0gTlVMTCk7CglpZiAodXNlX2NhbGxiYWNrKSB7CgkJY2JfZGF0YSA9IG1hbGxvYyhzaXplb2Yo
+UGVyY2VwdHJvbl9jYWxsYmFja19kYXRhX3QpKTsKCQlpZiAoY2JfZGF0YSA9PSBOVUxMKSB7CgkJ
+CWZwcmludGYoc3RkZXJyLCAiVW5hYmxlIHRvIGFsbG9jYXRlIG1lbW9yeSBmb3Igc3RyZWFtIGNh
+bGxiYWNrIGRhdGEgaW4gZnVuY3Rpb24gUGVyY2VwdHJvbl9jb252ZXJ0X2ludGVybmFsXG4iKTsK
+CQkJcmV0dXJuIE5VTEw7CgkJfQoJCWNiX2RhdGEtPm1heF9jb3VudCA9IDc7CgkJY2JfZGF0YS0+
+Y291bnQgICAgID0gMDsKCQkqY2FsbGJhY2tfZGF0YSAgICAgPSBjYl9kYXRhOwoJCSpjYWxsYmFj
+a19mdW5jICAgICA9ICZQZXJjZXB0cm9uX2NhbGxiYWNrX2ludGVybmFsOwoJfQoKCWludDY0X3Qg
+cGFyYW1fcG9pbnRzID0gaW50ZXJmYWNlX2FjdGlvbnMtPnBhcmFtX3BvaW50czsKCQoJaW50MzJf
+dCBwYXJhbV9QZXJjZXB0cm9uS2VybmVsX2xvb3BMZW5ndGggPSBQZXJjZXB0cm9uX2dldF9QZXJj
+ZXB0cm9uS2VybmVsX2xvb3BMZW5ndGgoICApOwoJCglpbnQ2NF90IHRtcF8wID0gKHBhcmFtX3Bv
+aW50cyAqIHBhcmFtX1BlcmNlcHRyb25LZXJuZWxfbG9vcExlbmd0aCk7CgkKCS8qIGNvZGUgZm9y
+IHNjYWxhciBQZXJjZXB0cm9uS2VybmVsLnJ1bl9jeWNsZV9jb3VudCAqLwoJdWludDY0X3QgdGlj
+a3NfUGVyY2VwdHJvbktlcm5lbCA9IHRtcF8wOwoJbWF4X3NldF90aWNrcyhhY3Rpb25zLCAiUGVy
+Y2VwdHJvbktlcm5lbCIsIHRtcF8wKTsKCUNIRUNLX0VSUk9SUzsKCS8qIGVuZCBvZiBjb2RlIGZv
+ciBzY2FsYXIgUGVyY2VwdHJvbktlcm5lbC5ydW5fY3ljbGVfY291bnQqLwoJCgkvKiBjb2RlIGZv
+ciBzY2FsYXIgUGVyY2VwdHJvbktlcm5lbC5wb2ludHMgKi8KCXVpbnQ2NF90IGluc2NhbGFyX1Bl
+cmNlcHRyb25LZXJuZWxfcG9pbnRzID0gcGFyYW1fcG9pbnRzOwoJbWF4X3NldF91aW50NjR0KGFj
+dGlvbnMsICJQZXJjZXB0cm9uS2VybmVsIiwgInBvaW50cyIsIGluc2NhbGFyX1BlcmNlcHRyb25L
+ZXJuZWxfcG9pbnRzKTsKCUNIRUNLX0VSUk9SUzsKCS8qIGVuZCBvZiBjb2RlIGZvciBzY2FsYXIg
+UGVyY2VwdHJvbktlcm5lbC5wb2ludHMqLwoJCglpbnQ2NF90IHRtcF8zID0gKHBhcmFtX3BvaW50
+cyAqIDQpOwoJCgkvKiBjb2RlIGZvciBzdHJlYW0gY2xzICovCglzaXplX3QgaW5zdHJlYW1fc2l6
+ZV9jbHMgPSB0bXBfMzsKCWlmIChpbnN0cmVhbV9zaXplX2NscyA+IDApIHsKCQljb25zdCBmbG9h
+dCAqc3RyZWFtX3B0ciA9IGludGVyZmFjZV9hY3Rpb25zLT5pbnN0cmVhbV9jbHM7CgkJaWYgKHVz
+ZV9jYWxsYmFjayAmJiAoMSA9PSBQZXJjZXB0cm9uX2NoZWNrX2FsaWduZWQoaW50ZXJmYWNlX2Fj
+dGlvbnMtPmluc3RyZWFtX2NscykpKSB7CgkJCWZsb2F0ICphbGlnbmVkX2luc3RyZWFtX2NscyA9
+IG1hbGxvYyhpbnN0cmVhbV9zaXplX2Nscyk7CgkJCWlmIChhbGlnbmVkX2luc3RyZWFtX2NscyA9
+PSBOVUxMKSB7CgkJCQltYXhfcmVwb3J0X2Vycm9yX3NsaWMoYWN0aW9ucy0+ZXJyb3JzLCBfX0ZJ
+TEVfXywgX19MSU5FX18sIDUyNiwgIkZhaWxlZCB0byBhbGxvY2F0ZSBhbGlnbmVkIG1lbW9yeSBm
+b3Igc3RyZWFtICdjbHMnIik7CgkJCQlDSEVDS19FUlJPUlM7CgkJCX0KCQkJKCZjYl9kYXRhLT5z
+dHJlYW1bY2JfZGF0YS0+Y291bnRdKS0+dXNlcl9wdHIgICAgPSAodWludDhfdCopIGludGVyZmFj
+ZV9hY3Rpb25zLT5pbnN0cmVhbV9jbHM7CgkJCSgmY2JfZGF0YS0+c3RyZWFtW2NiX2RhdGEtPmNv
+dW50XSktPmFsaWduZWRfcHRyID0gKHVpbnQ4X3QqKSBhbGlnbmVkX2luc3RyZWFtX2NsczsKCQkJ
+KCZjYl9kYXRhLT5zdHJlYW1bY2JfZGF0YS0+Y291bnRdKS0+c2l6ZSAgICAgICAgPSBpbnN0cmVh
+bV9zaXplX2NsczsKCQkJKCZjYl9kYXRhLT5zdHJlYW1bY2JfZGF0YS0+Y291bnRdKS0+aXNfb3V0
+cHV0ICAgPSAwOwoJCQljYl9kYXRhLT5jb3VudCArPSAxOwoJCQltZW1jcHkoYWxpZ25lZF9pbnN0
+cmVhbV9jbHMsIGludGVyZmFjZV9hY3Rpb25zLT5pbnN0cmVhbV9jbHMsIGluc3RyZWFtX3NpemVf
+Y2xzKTsKCQkJc3RyZWFtX3B0ciA9IGFsaWduZWRfaW5zdHJlYW1fY2xzOwoJCX0KCQltYXhfcXVl
+dWVfaW5wdXQoYWN0aW9ucywgImNscyIsIHN0cmVhbV9wdHIsIGluc3RyZWFtX3NpemVfY2xzKTsK
+CQlDSEVDS19FUlJPUlM7Cgl9CgkvKiBlbmQgb2YgY29kZSBmb3Igc3RyZWFtIGNscyAqLwoJCglp
+bnQ2NF90IHRtcF8xID0gKHBhcmFtX3BvaW50cyAqIDQpOwoJCgkvKiBjb2RlIGZvciBzdHJlYW0g
+eDEgKi8KCXNpemVfdCBpbnN0cmVhbV9zaXplX3gxID0gdG1wXzE7CglpZiAoaW5zdHJlYW1fc2l6
+ZV94MSA+IDApIHsKCQljb25zdCBmbG9hdCAqc3RyZWFtX3B0ciA9IGludGVyZmFjZV9hY3Rpb25z
+LT5pbnN0cmVhbV94MTsKCQlpZiAodXNlX2NhbGxiYWNrICYmICgxID09IFBlcmNlcHRyb25fY2hl
+Y2tfYWxpZ25lZChpbnRlcmZhY2VfYWN0aW9ucy0+aW5zdHJlYW1feDEpKSkgewoJCQlmbG9hdCAq
+YWxpZ25lZF9pbnN0cmVhbV94MSA9IG1hbGxvYyhpbnN0cmVhbV9zaXplX3gxKTsKCQkJaWYgKGFs
+aWduZWRfaW5zdHJlYW1feDEgPT0gTlVMTCkgewoJCQkJbWF4X3JlcG9ydF9lcnJvcl9zbGljKGFj
+dGlvbnMtPmVycm9ycywgX19GSUxFX18sIF9fTElORV9fLCA1MjYsICJGYWlsZWQgdG8gYWxsb2Nh
+dGUgYWxpZ25lZCBtZW1vcnkgZm9yIHN0cmVhbSAneDEnIik7CgkJCQlDSEVDS19FUlJPUlM7CgkJ
+CX0KCQkJKCZjYl9kYXRhLT5zdHJlYW1bY2JfZGF0YS0+Y291bnRdKS0+dXNlcl9wdHIgICAgPSAo
+dWludDhfdCopIGludGVyZmFjZV9hY3Rpb25zLT5pbnN0cmVhbV94MTsKCQkJKCZjYl9kYXRhLT5z
+dHJlYW1bY2JfZGF0YS0+Y291bnRdKS0+YWxpZ25lZF9wdHIgPSAodWludDhfdCopIGFsaWduZWRf
+aW5zdHJlYW1feDE7CgkJCSgmY2JfZGF0YS0+c3RyZWFtW2NiX2RhdGEtPmNvdW50XSktPnNpemUg
+ICAgICAgID0gaW5zdHJlYW1fc2l6ZV94MTsKCQkJKCZjYl9kYXRhLT5zdHJlYW1bY2JfZGF0YS0+
+Y291bnRdKS0+aXNfb3V0cHV0ICAgPSAwOwoJCQljYl9kYXRhLT5jb3VudCArPSAxOwoJCQltZW1j
+cHkoYWxpZ25lZF9pbnN0cmVhbV94MSwgaW50ZXJmYWNlX2FjdGlvbnMtPmluc3RyZWFtX3gxLCBp
+bnN0cmVhbV9zaXplX3gxKTsKCQkJc3RyZWFtX3B0ciA9IGFsaWduZWRfaW5zdHJlYW1feDE7CgkJ
+fQoJCW1heF9xdWV1ZV9pbnB1dChhY3Rpb25zLCAieDEiLCBzdHJlYW1fcHRyLCBpbnN0cmVhbV9z
+aXplX3gxKTsKCQlDSEVDS19FUlJPUlM7Cgl9CgkvKiBlbmQgb2YgY29kZSBmb3Igc3RyZWFtIHgx
+ICovCgkKCWludDY0X3QgdG1wXzIgPSAocGFyYW1fcG9pbnRzICogNCk7CgkKCS8qIGNvZGUgZm9y
+IHN0cmVhbSB4MiAqLwoJc2l6ZV90IGluc3RyZWFtX3NpemVfeDIgPSB0bXBfMjsKCWlmIChpbnN0
+cmVhbV9zaXplX3gyID4gMCkgewoJCWNvbnN0IGZsb2F0ICpzdHJlYW1fcHRyID0gaW50ZXJmYWNl
+X2FjdGlvbnMtPmluc3RyZWFtX3gyOwoJCWlmICh1c2VfY2FsbGJhY2sgJiYgKDEgPT0gUGVyY2Vw
+dHJvbl9jaGVja19hbGlnbmVkKGludGVyZmFjZV9hY3Rpb25zLT5pbnN0cmVhbV94MikpKSB7CgkJ
+CWZsb2F0ICphbGlnbmVkX2luc3RyZWFtX3gyID0gbWFsbG9jKGluc3RyZWFtX3NpemVfeDIpOwoJ
+CQlpZiAoYWxpZ25lZF9pbnN0cmVhbV94MiA9PSBOVUxMKSB7CgkJCQltYXhfcmVwb3J0X2Vycm9y
+X3NsaWMoYWN0aW9ucy0+ZXJyb3JzLCBfX0ZJTEVfXywgX19MSU5FX18sIDUyNiwgIkZhaWxlZCB0
+byBhbGxvY2F0ZSBhbGlnbmVkIG1lbW9yeSBmb3Igc3RyZWFtICd4MiciKTsKCQkJCUNIRUNLX0VS
+Uk9SUzsKCQkJfQoJCQkoJmNiX2RhdGEtPnN0cmVhbVtjYl9kYXRhLT5jb3VudF0pLT51c2VyX3B0
+ciAgICA9ICh1aW50OF90KikgaW50ZXJmYWNlX2FjdGlvbnMtPmluc3RyZWFtX3gyOwoJCQkoJmNi
+X2RhdGEtPnN0cmVhbVtjYl9kYXRhLT5jb3VudF0pLT5hbGlnbmVkX3B0ciA9ICh1aW50OF90Kikg
+YWxpZ25lZF9pbnN0cmVhbV94MjsKCQkJKCZjYl9kYXRhLT5zdHJlYW1bY2JfZGF0YS0+Y291bnRd
+KS0+c2l6ZSAgICAgICAgPSBpbnN0cmVhbV9zaXplX3gyOwoJCQkoJmNiX2RhdGEtPnN0cmVhbVtj
+Yl9kYXRhLT5jb3VudF0pLT5pc19vdXRwdXQgICA9IDA7CgkJCWNiX2RhdGEtPmNvdW50ICs9IDE7
+CgkJCW1lbWNweShhbGlnbmVkX2luc3RyZWFtX3gyLCBpbnRlcmZhY2VfYWN0aW9ucy0+aW5zdHJl
+YW1feDIsIGluc3RyZWFtX3NpemVfeDIpOwoJCQlzdHJlYW1fcHRyID0gYWxpZ25lZF9pbnN0cmVh
+bV94MjsKCQl9CgkJbWF4X3F1ZXVlX2lucHV0KGFjdGlvbnMsICJ4MiIsIHN0cmVhbV9wdHIsIGlu
+c3RyZWFtX3NpemVfeDIpOwoJCUNIRUNLX0VSUk9SUzsKCX0KCS8qIGVuZCBvZiBjb2RlIGZvciBz
+dHJlYW0geDIgKi8KCQoJaW50NjRfdCB0bXBfNCA9IChwYXJhbV9wb2ludHMgKiA0KTsKCQoJLyog
+Y29kZSBmb3Igc3RyZWFtIHkgKi8KCXNpemVfdCBpbnN0cmVhbV9zaXplX3kgPSB0bXBfNDsKCWlm
+IChpbnN0cmVhbV9zaXplX3kgPiAwKSB7CgkJY29uc3QgZmxvYXQgKnN0cmVhbV9wdHIgPSBpbnRl
+cmZhY2VfYWN0aW9ucy0+aW5zdHJlYW1feTsKCQlpZiAodXNlX2NhbGxiYWNrICYmICgxID09IFBl
+cmNlcHRyb25fY2hlY2tfYWxpZ25lZChpbnRlcmZhY2VfYWN0aW9ucy0+aW5zdHJlYW1feSkpKSB7
+CgkJCWZsb2F0ICphbGlnbmVkX2luc3RyZWFtX3kgPSBtYWxsb2MoaW5zdHJlYW1fc2l6ZV95KTsK
+CQkJaWYgKGFsaWduZWRfaW5zdHJlYW1feSA9PSBOVUxMKSB7CgkJCQltYXhfcmVwb3J0X2Vycm9y
+X3NsaWMoYWN0aW9ucy0+ZXJyb3JzLCBfX0ZJTEVfXywgX19MSU5FX18sIDUyNiwgIkZhaWxlZCB0
+byBhbGxvY2F0ZSBhbGlnbmVkIG1lbW9yeSBmb3Igc3RyZWFtICd5JyIpOwoJCQkJQ0hFQ0tfRVJS
+T1JTOwoJCQl9CgkJCSgmY2JfZGF0YS0+c3RyZWFtW2NiX2RhdGEtPmNvdW50XSktPnVzZXJfcHRy
+ICAgID0gKHVpbnQ4X3QqKSBpbnRlcmZhY2VfYWN0aW9ucy0+aW5zdHJlYW1feTsKCQkJKCZjYl9k
+YXRhLT5zdHJlYW1bY2JfZGF0YS0+Y291bnRdKS0+YWxpZ25lZF9wdHIgPSAodWludDhfdCopIGFs
+aWduZWRfaW5zdHJlYW1feTsKCQkJKCZjYl9kYXRhLT5zdHJlYW1bY2JfZGF0YS0+Y291bnRdKS0+
+c2l6ZSAgICAgICAgPSBpbnN0cmVhbV9zaXplX3k7CgkJCSgmY2JfZGF0YS0+c3RyZWFtW2NiX2Rh
+dGEtPmNvdW50XSktPmlzX291dHB1dCAgID0gMDsKCQkJY2JfZGF0YS0+Y291bnQgKz0gMTsKCQkJ
+bWVtY3B5KGFsaWduZWRfaW5zdHJlYW1feSwgaW50ZXJmYWNlX2FjdGlvbnMtPmluc3RyZWFtX3ks
+IGluc3RyZWFtX3NpemVfeSk7CgkJCXN0cmVhbV9wdHIgPSBhbGlnbmVkX2luc3RyZWFtX3k7CgkJ
+fQoJCW1heF9xdWV1ZV9pbnB1dChhY3Rpb25zLCAieSIsIHN0cmVhbV9wdHIsIGluc3RyZWFtX3Np
+emVfeSk7CgkJQ0hFQ0tfRVJST1JTOwoJfQoJLyogZW5kIG9mIGNvZGUgZm9yIHN0cmVhbSB5ICov
+CgkKCWludDY0X3QgdG1wXzUgPSAocGFyYW1fcG9pbnRzICogNCk7CgkKCS8qIGNvZGUgZm9yIHN0
+cmVhbSB3MCAqLwoJc2l6ZV90IG91dHN0cmVhbV9zaXplX3cwID0gdG1wXzU7CglpZiAob3V0c3Ry
+ZWFtX3NpemVfdzAgPiAwKSB7CgkJZmxvYXQgKnN0cmVhbV9wdHIgPSBpbnRlcmZhY2VfYWN0aW9u
+cy0+b3V0c3RyZWFtX3cwOwoJCWlmICh1c2VfY2FsbGJhY2sgJiYgKDEgPT0gUGVyY2VwdHJvbl9j
+aGVja19hbGlnbmVkKGludGVyZmFjZV9hY3Rpb25zLT5vdXRzdHJlYW1fdzApKSkgewoJCQlmbG9h
+dCAqYWxpZ25lZF9vdXRzdHJlYW1fdzAgPSBtYWxsb2Mob3V0c3RyZWFtX3NpemVfdzApOwoJCQlp
+ZiAoYWxpZ25lZF9vdXRzdHJlYW1fdzAgPT0gTlVMTCkgewoJCQkJbWF4X3JlcG9ydF9lcnJvcl9z
+bGljKGFjdGlvbnMtPmVycm9ycywgX19GSUxFX18sIF9fTElORV9fLCA1MjYsICJGYWlsZWQgdG8g
+YWxsb2NhdGUgYWxpZ25lZCBtZW1vcnkgZm9yIHN0cmVhbSAndzAnIik7CgkJCQlDSEVDS19FUlJP
+UlM7CgkJCX0KCQkJKCZjYl9kYXRhLT5zdHJlYW1bY2JfZGF0YS0+Y291bnRdKS0+dXNlcl9wdHIg
+ICAgPSAodWludDhfdCopIGludGVyZmFjZV9hY3Rpb25zLT5vdXRzdHJlYW1fdzA7CgkJCSgmY2Jf
+ZGF0YS0+c3RyZWFtW2NiX2RhdGEtPmNvdW50XSktPmFsaWduZWRfcHRyID0gKHVpbnQ4X3QqKSBh
+bGlnbmVkX291dHN0cmVhbV93MDsKCQkJKCZjYl9kYXRhLT5zdHJlYW1bY2JfZGF0YS0+Y291bnRd
+KS0+c2l6ZSAgICAgICAgPSBvdXRzdHJlYW1fc2l6ZV93MDsKCQkJKCZjYl9kYXRhLT5zdHJlYW1b
+Y2JfZGF0YS0+Y291bnRdKS0+aXNfb3V0cHV0ICAgPSAxOwoJCQljYl9kYXRhLT5jb3VudCArPSAx
+OwoJCQlzdHJlYW1fcHRyID0gYWxpZ25lZF9vdXRzdHJlYW1fdzA7CgkJfQoJCW1heF9xdWV1ZV9v
+dXRwdXQoYWN0aW9ucywgIncwIiwgc3RyZWFtX3B0ciwgb3V0c3RyZWFtX3NpemVfdzApOwoJCUNI
+RUNLX0VSUk9SUzsKCX0KCS8qIGVuZCBvZiBjb2RlIGZvciBzdHJlYW0gdzAgKi8KCQoJaW50NjRf
+dCB0bXBfNiA9IChwYXJhbV9wb2ludHMgKiA0KTsKCQoJLyogY29kZSBmb3Igc3RyZWFtIHcxICov
+CglzaXplX3Qgb3V0c3RyZWFtX3NpemVfdzEgPSB0bXBfNjsKCWlmIChvdXRzdHJlYW1fc2l6ZV93
+MSA+IDApIHsKCQlmbG9hdCAqc3RyZWFtX3B0ciA9IGludGVyZmFjZV9hY3Rpb25zLT5vdXRzdHJl
+YW1fdzE7CgkJaWYgKHVzZV9jYWxsYmFjayAmJiAoMSA9PSBQZXJjZXB0cm9uX2NoZWNrX2FsaWdu
+ZWQoaW50ZXJmYWNlX2FjdGlvbnMtPm91dHN0cmVhbV93MSkpKSB7CgkJCWZsb2F0ICphbGlnbmVk
+X291dHN0cmVhbV93MSA9IG1hbGxvYyhvdXRzdHJlYW1fc2l6ZV93MSk7CgkJCWlmIChhbGlnbmVk
+X291dHN0cmVhbV93MSA9PSBOVUxMKSB7CgkJCQltYXhfcmVwb3J0X2Vycm9yX3NsaWMoYWN0aW9u
+cy0+ZXJyb3JzLCBfX0ZJTEVfXywgX19MSU5FX18sIDUyNiwgIkZhaWxlZCB0byBhbGxvY2F0ZSBh
+bGlnbmVkIG1lbW9yeSBmb3Igc3RyZWFtICd3MSciKTsKCQkJCUNIRUNLX0VSUk9SUzsKCQkJfQoJ
+CQkoJmNiX2RhdGEtPnN0cmVhbVtjYl9kYXRhLT5jb3VudF0pLT51c2VyX3B0ciAgICA9ICh1aW50
+OF90KikgaW50ZXJmYWNlX2FjdGlvbnMtPm91dHN0cmVhbV93MTsKCQkJKCZjYl9kYXRhLT5zdHJl
+YW1bY2JfZGF0YS0+Y291bnRdKS0+YWxpZ25lZF9wdHIgPSAodWludDhfdCopIGFsaWduZWRfb3V0
+c3RyZWFtX3cxOwoJCQkoJmNiX2RhdGEtPnN0cmVhbVtjYl9kYXRhLT5jb3VudF0pLT5zaXplICAg
+ICAgICA9IG91dHN0cmVhbV9zaXplX3cxOwoJCQkoJmNiX2RhdGEtPnN0cmVhbVtjYl9kYXRhLT5j
+b3VudF0pLT5pc19vdXRwdXQgICA9IDE7CgkJCWNiX2RhdGEtPmNvdW50ICs9IDE7CgkJCXN0cmVh
+bV9wdHIgPSBhbGlnbmVkX291dHN0cmVhbV93MTsKCQl9CgkJbWF4X3F1ZXVlX291dHB1dChhY3Rp
+b25zLCAidzEiLCBzdHJlYW1fcHRyLCBvdXRzdHJlYW1fc2l6ZV93MSk7CgkJQ0hFQ0tfRVJST1JT
+OwoJfQoJLyogZW5kIG9mIGNvZGUgZm9yIHN0cmVhbSB3MSAqLwoJCglpbnQ2NF90IHRtcF83ID0g
+KHBhcmFtX3BvaW50cyAqIDQpOwoJCgkvKiBjb2RlIGZvciBzdHJlYW0gdzIgKi8KCXNpemVfdCBv
+dXRzdHJlYW1fc2l6ZV93MiA9IHRtcF83OwoJaWYgKG91dHN0cmVhbV9zaXplX3cyID4gMCkgewoJ
+CWZsb2F0ICpzdHJlYW1fcHRyID0gaW50ZXJmYWNlX2FjdGlvbnMtPm91dHN0cmVhbV93MjsKCQlp
+ZiAodXNlX2NhbGxiYWNrICYmICgxID09IFBlcmNlcHRyb25fY2hlY2tfYWxpZ25lZChpbnRlcmZh
+Y2VfYWN0aW9ucy0+b3V0c3RyZWFtX3cyKSkpIHsKCQkJZmxvYXQgKmFsaWduZWRfb3V0c3RyZWFt
+X3cyID0gbWFsbG9jKG91dHN0cmVhbV9zaXplX3cyKTsKCQkJaWYgKGFsaWduZWRfb3V0c3RyZWFt
+X3cyID09IE5VTEwpIHsKCQkJCW1heF9yZXBvcnRfZXJyb3Jfc2xpYyhhY3Rpb25zLT5lcnJvcnMs
+IF9fRklMRV9fLCBfX0xJTkVfXywgNTI2LCAiRmFpbGVkIHRvIGFsbG9jYXRlIGFsaWduZWQgbWVt
+b3J5IGZvciBzdHJlYW0gJ3cyJyIpOwoJCQkJQ0hFQ0tfRVJST1JTOwoJCQl9CgkJCSgmY2JfZGF0
+YS0+c3RyZWFtW2NiX2RhdGEtPmNvdW50XSktPnVzZXJfcHRyICAgID0gKHVpbnQ4X3QqKSBpbnRl
+cmZhY2VfYWN0aW9ucy0+b3V0c3RyZWFtX3cyOwoJCQkoJmNiX2RhdGEtPnN0cmVhbVtjYl9kYXRh
+LT5jb3VudF0pLT5hbGlnbmVkX3B0ciA9ICh1aW50OF90KikgYWxpZ25lZF9vdXRzdHJlYW1fdzI7
+CgkJCSgmY2JfZGF0YS0+c3RyZWFtW2NiX2RhdGEtPmNvdW50XSktPnNpemUgICAgICAgID0gb3V0
+c3RyZWFtX3NpemVfdzI7CgkJCSgmY2JfZGF0YS0+c3RyZWFtW2NiX2RhdGEtPmNvdW50XSktPmlz
+X291dHB1dCAgID0gMTsKCQkJY2JfZGF0YS0+Y291bnQgKz0gMTsKCQkJc3RyZWFtX3B0ciA9IGFs
+aWduZWRfb3V0c3RyZWFtX3cyOwoJCX0KCQltYXhfcXVldWVfb3V0cHV0KGFjdGlvbnMsICJ3MiIs
+IHN0cmVhbV9wdHIsIG91dHN0cmVhbV9zaXplX3cyKTsKCQlDSEVDS19FUlJPUlM7Cgl9CgkvKiBl
+bmQgb2YgY29kZSBmb3Igc3RyZWFtIHcyICovCgkKCWlmICh1c2VfY2FsbGJhY2sgJiYgY2JfZGF0
+YS0+Y291bnQgPT0gMCkgewoJCSpjYWxsYmFja19kYXRhID0gTlVMTDsKCQkqY2FsbGJhY2tfZnVu
+YyA9IE5VTEw7CgkJZnJlZShjYl9kYXRhKTsKCX0KCXJldHVybiBhY3Rpb25zOwojdW5kZWYgQ0hF
+Q0tfRVJST1JTCn0KCnZvaWQgUGVyY2VwdHJvbigKCWludDY0X3QgcGFyYW1fcG9pbnRzLAoJY29u
+c3QgZmxvYXQgKmluc3RyZWFtX2NscywKCWNvbnN0IGZsb2F0ICppbnN0cmVhbV94MSwKCWNvbnN0
+IGZsb2F0ICppbnN0cmVhbV94MiwKCWNvbnN0IGZsb2F0ICppbnN0cmVhbV95LAoJZmxvYXQgKm91
+dHN0cmVhbV93MCwKCWZsb2F0ICpvdXRzdHJlYW1fdzEsCglmbG9hdCAqb3V0c3RyZWFtX3cyKQp7
+Cgkodm9pZCkgcHRocmVhZF9vbmNlKCZzbGljX2JzX2lzX2luaXRpYWxpc2VkLCBQZXJjZXB0cm9u
+X3N0YXRpY19pbml0KTsKCUNIRUNLX05VTEwoc3RvcmVkX21heGZpbGUsICJNYXhmaWxlIHdhcyBu
+b3QgbG9hZGVkIiwgKTsKCW1heF9ydW5fdCAqcnVuID0gUGVyY2VwdHJvbl9ub25ibG9jayhwYXJh
+bV9wb2ludHMsIGluc3RyZWFtX2NscywgaW5zdHJlYW1feDEsIGluc3RyZWFtX3gyLCBpbnN0cmVh
+bV95LCBvdXRzdHJlYW1fdzAsIG91dHN0cmVhbV93MSwgb3V0c3RyZWFtX3cyKTsKCUNIRUNLX05V
+TEwocnVuLCAiVW5hYmxlIHRvIHJ1biBhY3Rpb25zIiwgKTsKCW1heF93YWl0KHJ1bik7Cn0KCm1h
+eF9ydW5fdCAqUGVyY2VwdHJvbl9ub25ibG9jaygKCWludDY0X3QgcGFyYW1fcG9pbnRzLAoJY29u
+c3QgZmxvYXQgKmluc3RyZWFtX2NscywKCWNvbnN0IGZsb2F0ICppbnN0cmVhbV94MSwKCWNvbnN0
+IGZsb2F0ICppbnN0cmVhbV94MiwKCWNvbnN0IGZsb2F0ICppbnN0cmVhbV95LAoJZmxvYXQgKm91
+dHN0cmVhbV93MCwKCWZsb2F0ICpvdXRzdHJlYW1fdzEsCglmbG9hdCAqb3V0c3RyZWFtX3cyKQp7
+CglQZXJjZXB0cm9uX2FjdGlvbnNfdCBpbnRlcmZhY2VfYWN0aW9uczsKCWludGVyZmFjZV9hY3Rp
+b25zLnBhcmFtX3BvaW50cyA9IHBhcmFtX3BvaW50czsKCWludGVyZmFjZV9hY3Rpb25zLmluc3Ry
+ZWFtX2NscyA9IGluc3RyZWFtX2NsczsKCWludGVyZmFjZV9hY3Rpb25zLmluc3RyZWFtX3gxID0g
+aW5zdHJlYW1feDE7CglpbnRlcmZhY2VfYWN0aW9ucy5pbnN0cmVhbV94MiA9IGluc3RyZWFtX3gy
+OwoJaW50ZXJmYWNlX2FjdGlvbnMuaW5zdHJlYW1feSA9IGluc3RyZWFtX3k7CglpbnRlcmZhY2Vf
+YWN0aW9ucy5vdXRzdHJlYW1fdzAgPSBvdXRzdHJlYW1fdzA7CglpbnRlcmZhY2VfYWN0aW9ucy5v
+dXRzdHJlYW1fdzEgPSBvdXRzdHJlYW1fdzE7CglpbnRlcmZhY2VfYWN0aW9ucy5vdXRzdHJlYW1f
+dzIgPSBvdXRzdHJlYW1fdzI7Cgkodm9pZCkgcHRocmVhZF9vbmNlKCZzbGljX2JzX2lzX2luaXRp
+YWxpc2VkLCBQZXJjZXB0cm9uX3N0YXRpY19pbml0KTsKCUNIRUNLX05VTEwoc3RvcmVkX21heGZp
+bGUsICJNYXhmaWxlIHdhcyBub3QgbG9hZGVkIiwgTlVMTCk7Cgl2b2lkICgqY2JfZnVuYykodm9p
+ZCopID0gTlVMTDsKCXZvaWQgICpjYl9kYXRhICAgICAgICAgPSBOVUxMOwoJbWF4X2FjdGlvbnNf
+dCAqYWN0aW9ucyA9IFBlcmNlcHRyb25fY29udmVydF9pbnRlcm5hbChzdG9yZWRfbWF4ZmlsZSwg
+JmludGVyZmFjZV9hY3Rpb25zLCAxLCAmY2JfZnVuYywgJmNiX2RhdGEpOwoJQ0hFQ0tfTlVMTChh
+Y3Rpb25zLCAiVW5hYmxlIHRvIGJ1aWxkIGFjdGlvbnMiLCBOVUxMKTsKCW1heF92YWxpZGF0ZShh
+Y3Rpb25zKTsKCUNIRUNLX0VSUk9SU19TVChhY3Rpb25zLCBOVUxMKTsKCUNIRUNLX0VSUk9SU19T
+VChzdG9yZWRfZW5naW5lLCBOVUxMKTsKCW1heF9ydW5fdCAqcnVuOwoJaWYgKGNiX2Z1bmMgPT0g
+TlVMTCkgewoJCXJ1biA9IG1heF9ydW5fbm9uYmxvY2soc3RvcmVkX2VuZ2luZSwgYWN0aW9ucyk7
+Cgl9IGVsc2UgewoJCXJ1biA9IG1heF9ydW5fbm9uYmxvY2tfd2l0aF9jYihzdG9yZWRfZW5naW5l
+LCBhY3Rpb25zLCBjYl9mdW5jLCBjYl9kYXRhKTsKCX0KCUNIRUNLX05VTEwocnVuLCAiVW5hYmxl
+IHRvIHJ1biBhY3Rpb25zIiwgTlVMTCk7CglDSEVDS19FUlJPUlNfU1QoYWN0aW9ucywgTlVMTCk7
+CgltYXhfYWN0aW9uc19mcmVlKGFjdGlvbnMpOwoJcmV0dXJuIHJ1bjsKfQoKdm9pZCBQZXJjZXB0
+cm9uX3J1bigKCW1heF9lbmdpbmVfdCAqZW5naW5lLAoJUGVyY2VwdHJvbl9hY3Rpb25zX3QgKmlu
+dGVyZmFjZV9hY3Rpb25zKQp7CgltYXhfcnVuX3QgKnJ1biA9IFBlcmNlcHRyb25fcnVuX25vbmJs
+b2NrKGVuZ2luZSwgaW50ZXJmYWNlX2FjdGlvbnMpOwoJQ0hFQ0tfTlVMTChydW4sICJVbmFibGUg
+dG8gcnVuIGFjdGlvbnMiLCApOwoJbWF4X3dhaXQocnVuKTsKfQoKbWF4X3J1bl90ICpQZXJjZXB0
+cm9uX3J1bl9ub25ibG9jaygKCW1heF9lbmdpbmVfdCAqZW5naW5lLAoJUGVyY2VwdHJvbl9hY3Rp
+b25zX3QgKmludGVyZmFjZV9hY3Rpb25zKQp7CgltYXhfZmlsZV90ICptYXhmaWxlID0gbWF4X2Vu
+Z2luZV9nZXRfbWF4X2ZpbGUoZW5naW5lKTsgCgl2b2lkICgqY2JfZnVuYykodm9pZCopID0gTlVM
+TDsKCXZvaWQgICpjYl9kYXRhICAgICAgICAgPSBOVUxMOwoJbWF4X2FjdGlvbnNfdCAqYWN0aW9u
+cyA9IFBlcmNlcHRyb25fY29udmVydF9pbnRlcm5hbChtYXhmaWxlLCBpbnRlcmZhY2VfYWN0aW9u
+cywgMSwgJmNiX2Z1bmMsICZjYl9kYXRhKTsKCUNIRUNLX0VSUk9SU19TVChhY3Rpb25zLCBOVUxM
+KTsKCW1heF9ydW5fdCAqcnVuOwoJaWYgKGNiX2Z1bmMgPT0gTlVMTCkgewoJCXJ1biA9IG1heF9y
+dW5fbm9uYmxvY2soZW5naW5lLCBhY3Rpb25zKTsKCX0gZWxzZSB7CgkJcnVuID0gbWF4X3J1bl9u
+b25ibG9ja193aXRoX2NiKGVuZ2luZSwgYWN0aW9ucywgY2JfZnVuYywgY2JfZGF0YSk7Cgl9CglD
+SEVDS19OVUxMKHJ1biwgIlVuYWJsZSB0byBydW4gYWN0aW9ucyIsIE5VTEwpOwoJbWF4X2FjdGlv
+bnNfZnJlZShhY3Rpb25zKTsKCXJldHVybiBydW47Cn0KCgovKioKICogXGJyaWVmIEdyb3VwIHJ1
+biBhZHZhbmNlZCBzdGF0aWMgZnVuY3Rpb24gZm9yIHRoZSBpbnRlcmZhY2UgJ2RlZmF1bHQnLgog
+KiAKICogXHBhcmFtIFtpbl0gZ3JvdXAgR3JvdXAgdG8gdXNlLgogKiBccGFyYW0gW2luLG91dF0g
+aW50ZXJmYWNlX2FjdGlvbnMgQWN0aW9ucyB0byBydW4uCiAqCiAqIFJ1biB0aGUgYWN0aW9ucyBv
+biB0aGUgZmlyc3QgZGV2aWNlIGF2YWlsYWJsZSBpbiB0aGUgZ3JvdXAuCiAqLwp2b2lkIFBlcmNl
+cHRyb25fcnVuX2dyb3VwKG1heF9ncm91cF90ICpncm91cCwgUGVyY2VwdHJvbl9hY3Rpb25zX3Qg
+KmludGVyZmFjZV9hY3Rpb25zKQp7CgltYXhfcnVuX3QgKnJ1biA9IFBlcmNlcHRyb25fcnVuX2dy
+b3VwX25vbmJsb2NrKGdyb3VwLCBpbnRlcmZhY2VfYWN0aW9ucyk7CglDSEVDS19OVUxMKHJ1biwg
+IlVuYWJsZSB0byBydW4gYWN0aW9ucyIsICk7CgltYXhfd2FpdChydW4pOwp9CgoKLyoqCiAqIFxi
+cmllZiBHcm91cCBydW4gYWR2YW5jZWQgc3RhdGljIG5vbi1ibG9ja2luZyBmdW5jdGlvbiBmb3Ig
+dGhlIGludGVyZmFjZSAnZGVmYXVsdCcuCiAqIAogKgogKiBTY2hlZHVsZSB0aGUgYWN0aW9ucyB0
+byBydW4gb24gdGhlIGZpcnN0IGRldmljZSBhdmFpbGFibGUgaW4gdGhlIGdyb3VwIGFuZCByZXR1
+cm4gaW1tZWRpYXRlbHkuCiAqIFRoZSBzdGF0dXMgb2YgdGhlIHJ1biBtdXN0IGJlIGNoZWNrZWQg
+d2l0aCA6Om1heF93YWl0LiAKICogTm90ZSB0aGF0IHVzZSBvZiA6Om1heF9ub3dhaXQgaXMgcHJv
+aGliaXRlZCB3aXRoIG5vbi1ibG9ja2luZyBydW5uaW5nIG9uIGdyb3VwczoKICogc2VlIHRoZSA6
+Om1heF9ydW5fZ3JvdXBfbm9uYmxvY2sgZG9jdW1lbnRhdGlvbiBmb3IgbW9yZSBleHBsYW5hdGlv
+bi4KICoKICogXHBhcmFtIFtpbl0gZ3JvdXAgR3JvdXAgdG8gdXNlLgogKiBccGFyYW0gW2luXSBp
+bnRlcmZhY2VfYWN0aW9ucyBBY3Rpb25zIHRvIHJ1bi4KICogXHJldHVybiBBIGhhbmRsZSBvbiB0
+aGUgZXhlY3V0aW9uIHN0YXR1cyBvZiB0aGUgYWN0aW9ucywgb3IgTlVMTCBpbiBjYXNlIG9mIGVy
+cm9yLgogKi8KbWF4X3J1bl90ICpQZXJjZXB0cm9uX3J1bl9ncm91cF9ub25ibG9jayhtYXhfZ3Jv
+dXBfdCAqZ3JvdXAsIFBlcmNlcHRyb25fYWN0aW9uc190ICppbnRlcmZhY2VfYWN0aW9ucykKewoJ
+bWF4X2ZpbGVfdCAqbWF4ZmlsZSA9IG1heF9ncm91cF9nZXRfbWF4X2ZpbGUoZ3JvdXApOwoJbWF4
+X2FjdGlvbnNfdCAqYWN0aW9ucyA9IFBlcmNlcHRyb25fY29udmVydF9pbnRlcm5hbChtYXhmaWxl
+LCBpbnRlcmZhY2VfYWN0aW9ucywgMSwgTlVMTCwgTlVMTCk7CglpZihhY3Rpb25zID09IE5VTEwp
+IHJldHVybiBOVUxMOwoJaWYoIW1heF9vayhhY3Rpb25zLT5lcnJvcnMpKSByZXR1cm4gTlVMTDsK
+CW1heF92YWxpZGF0ZShhY3Rpb25zKTsKCW1heF9ydW5fdCAqcnVuID0gbWF4X3J1bl9ncm91cF9u
+b25ibG9jayhncm91cCwgYWN0aW9ucyk7CgltYXhfYWN0aW9uc19mcmVlKGFjdGlvbnMpOwoJcmV0
+dXJuIHJ1bjsKfQoKCi8qKgogKiBcYnJpZWYgQXJyYXkgcnVuIGFkdmFuY2VkIHN0YXRpYyBmdW5j
+dGlvbiBmb3IgdGhlIGludGVyZmFjZSAnZGVmYXVsdCcuCiAqIAogKiBccGFyYW0gW2luXSBlbmdh
+cnJheSBUaGUgYXJyYXkgb2YgZGV2aWNlcyB0byB1c2UuCiAqIFxwYXJhbSBbaW4sb3V0XSBpbnRl
+cmZhY2VfYWN0aW9ucyBUaGUgYXJyYXkgb2YgYWN0aW9ucyB0byBydW4uCiAqCiAqIFJ1biB0aGUg
+YXJyYXkgb2YgYWN0aW9ucyBvbiB0aGUgYXJyYXkgb2YgZW5naW5lcy4gIFRoZSBsZW5ndGggb2Yg
+aW50ZXJmYWNlX2FjdGlvbnMKICogbXVzdCBtYXRjaCB0aGUgc2l6ZSBvZiBlbmdhcnJheS4KICov
+CnZvaWQgUGVyY2VwdHJvbl9ydW5fYXJyYXkobWF4X2VuZ2FycmF5X3QgKmVuZ2FycmF5LCBQZXJj
+ZXB0cm9uX2FjdGlvbnNfdCAqaW50ZXJmYWNlX2FjdGlvbnNbXSkKewoJbWF4X3J1bl90ICpydW4g
+PSBQZXJjZXB0cm9uX3J1bl9hcnJheV9ub25ibG9jayhlbmdhcnJheSwgaW50ZXJmYWNlX2FjdGlv
+bnMpOwoJQ0hFQ0tfTlVMTChydW4sICJVbmFibGUgdG8gcnVuIGFjdGlvbnMiLCApOwoJbWF4X3dh
+aXQocnVuKTsKfQoKCi8qKgogKiBcYnJpZWYgQXJyYXkgcnVuIGFkdmFuY2VkIHN0YXRpYyBub24t
+YmxvY2tpbmcgZnVuY3Rpb24gZm9yIHRoZSBpbnRlcmZhY2UgJ2RlZmF1bHQnLgogKiAKICoKICog
+U2NoZWR1bGUgdG8gcnVuIHRoZSBhcnJheSBvZiBhY3Rpb25zIG9uIHRoZSBhcnJheSBvZiBlbmdp
+bmVzLCBhbmQgcmV0dXJuIGltbWVkaWF0ZWx5LgogKiBUaGUgbGVuZ3RoIG9mIGludGVyZmFjZV9h
+Y3Rpb25zIG11c3QgbWF0Y2ggdGhlIHNpemUgb2YgZW5nYXJyYXkuCiAqIFRoZSBzdGF0dXMgb2Yg
+dGhlIHJ1biBjYW4gYmUgY2hlY2tlZCBlaXRoZXIgYnkgOjptYXhfd2FpdCBvciA6Om1heF9ub3dh
+aXQ7CiAqIG5vdGUgdGhhdCBvbmUgb2YgdGhlc2UgKm11c3QqIGJlIGNhbGxlZCwgc28gdGhhdCBh
+c3NvY2lhdGVkIG1lbW9yeSBjYW4gYmUgcmVsZWFzZWQuCiAqCiAqIFxwYXJhbSBbaW5dIGVuZ2Fy
+cmF5IFRoZSBhcnJheSBvZiBkZXZpY2VzIHRvIHVzZS4KICogXHBhcmFtIFtpbl0gaW50ZXJmYWNl
+X2FjdGlvbnMgVGhlIGFycmF5IG9mIGFjdGlvbnMgdG8gcnVuLgogKiBccmV0dXJuIEEgaGFuZGxl
+IG9uIHRoZSBleGVjdXRpb24gc3RhdHVzIG9mIHRoZSBhY3Rpb25zLCBvciBOVUxMIGluIGNhc2Ug
+b2YgZXJyb3IuCiAqLwptYXhfcnVuX3QgKlBlcmNlcHRyb25fcnVuX2FycmF5X25vbmJsb2NrKG1h
+eF9lbmdhcnJheV90ICplbmdhcnJheSwgUGVyY2VwdHJvbl9hY3Rpb25zX3QgKmludGVyZmFjZV9h
+Y3Rpb25zW10pCnsKCW1heF9maWxlX3QgKm1heGZpbGUgPSBtYXhfZW5nYXJyYXlfZ2V0X21heF9m
+aWxlKGVuZ2FycmF5LCAwKTsKCWludCBpOwoJbWF4X2FjdGFycmF5X3QgKmFjdGFycmF5ID0gbWF4
+X2FjdGFycmF5X2luaXQobWF4ZmlsZSwgZW5nYXJyYXktPnNpemUpOwoJaWYgKGFjdGFycmF5ID09
+IE5VTEwpIHJldHVybiBOVUxMOwoJbWF4X2FjdGlvbnNfdCAqKmFycl9hY3Rpb25zID0gbWFsbG9j
+KGVuZ2FycmF5LT5zaXplICogc2l6ZW9mKG1heF9hY3Rpb25zX3QqKSk7Cglmb3IgKCBpID0gMCA7
+IGkgPCBhY3RhcnJheS0+c2l6ZTsgaSsrICkgewoJCW1heF9hY3Rpb25zX3QgKmFjdGlvbnMgPSBQ
+ZXJjZXB0cm9uX2NvbnZlcnRfaW50ZXJuYWwobWF4ZmlsZSwgaW50ZXJmYWNlX2FjdGlvbnNbaV0s
+IDEsIE5VTEwsIE5VTEwpOwoJCWlmIChhY3Rpb25zID09IE5VTEwpIHJldHVybiBOVUxMOwoJCWFy
+cl9hY3Rpb25zW2ldID0gYWN0aW9uczsKCQltYXhfc2V0X2FjdGlvbihhY3RhcnJheSwgaSwgYWN0
+aW9ucyk7Cgl9CgltYXhfcnVuX3QgKnJ1biA9IG1heF9ydW5fYXJyYXlfbm9uYmxvY2soZW5nYXJy
+YXksIGFjdGFycmF5KTsKCWZvciAoIGkgPSAwIDsgaSA8IGFjdGFycmF5LT5zaXplIDsgaSsrICkg
+eyBtYXhfYWN0aW9uc19mcmVlKGFycl9hY3Rpb25zW2ldKTsgfQoJbWF4X2FjdGFycmF5X2ZyZWUo
+YWN0YXJyYXkpOwoJZnJlZShhcnJfYWN0aW9ucyk7CglyZXR1cm4gcnVuOwp9CgoKLyoqCiAqIFxi
+cmllZiBDb252ZXJ0cyBhIHN0YXRpYy1pbnRlcmZhY2UgYWN0aW9uIHN0cnVjdCBpbnRvIGEgZHlu
+YW1pYy1pbnRlcmZhY2UgbWF4X2FjdGlvbnNfdCBzdHJ1Y3QuCiAqCiAqIE5vdGUgdGhhdCB0aGlz
+IGlzIGFuIGludGVybmFsIHV0aWxpdHkgZnVuY3Rpb24gdXNlZCBieSBvdGhlciBmdW5jdGlvbnMg
+aW4gdGhlIHN0YXRpYyBpbnRlcmZhY2UuCiAqCiAqIFxwYXJhbSBbaW5dIG1heGZpbGUgVGhlIG1h
+eGZpbGUgdG8gdXNlLgogKiBccGFyYW0gW2luXSBpbnRlcmZhY2VfYWN0aW9ucyBUaGUgaW50ZXJm
+YWNlLXNwZWNpZmljIGFjdGlvbnMgdG8gcnVuLgogKiBccmV0dXJuIFRoZSBkeW5hbWljLWludGVy
+ZmFjZSBhY3Rpb25zIHRvIHJ1biwgb3IgTlVMTCBpbiBjYXNlIG9mIGVycm9yLgogKi8KbWF4X2Fj
+dGlvbnNfdCogUGVyY2VwdHJvbl9jb252ZXJ0KG1heF9maWxlX3QgKm1heGZpbGUsIFBlcmNlcHRy
+b25fYWN0aW9uc190ICppbnRlcmZhY2VfYWN0aW9ucykKewoJcmV0dXJuIFBlcmNlcHRyb25fY29u
+dmVydF9pbnRlcm5hbChtYXhmaWxlLCBpbnRlcmZhY2VfYWN0aW9ucywgMCwgTlVMTCwgTlVMTCk7
+Cn0KCiN1bmRlZiBDSEVDS19FUlJPUlNfU1QKI3VuZGVmIENIRUNLX05VTEwKCgo=
+#endif /* SLIC_B64_DEFINITIONS */
+
+#ifdef SLIC_EXTRA_FILES
+PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+PHVz
+ZXJmaWxlcyBmb3JtYXQtdmVyc2lvbj0iMjAxMjAyMDAiLz4=
+#endif /* SLIC_EXTRA_FILES */
+
+#ifdef PHOTON_NODE_ADD_DATA
+#define PHOTON_NODE_ADD_DATA_PRESENT 1
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 2, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 119, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 5, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 131, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 68, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 69, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 70, "SquashFactor", 1.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 71, "SquashFactor", 1.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 112, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 130, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 19, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 20, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 21, "SquashFactor", 1.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 22, "SquashFactor", 1.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 23, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 129, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 25, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 26, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 27, "SquashFactor", 1.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 28, "SquashFactor", 1.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 29, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 30, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 98, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 97, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 99, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 111, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 0, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 3, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 4, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 128, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 50, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 108, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 51, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 52, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 53, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 72, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 127, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 74, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 75, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 76, "SquashFactor", 1.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 77, "SquashFactor", 1.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 115, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 100, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 126, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 7, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 8, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 9, "SquashFactor", 1.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 10, "SquashFactor", 1.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 113, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 11, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 40, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 101, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 125, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 56, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 114, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 109, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 57, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 58, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 59, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 78, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 124, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 80, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 81, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 82, "SquashFactor", 1.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 83, "SquashFactor", 1.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 118, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 102, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 123, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 13, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 14, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 15, "SquashFactor", 1.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 16, "SquashFactor", 1.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 116, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 17, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 46, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 103, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 122, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 62, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 117, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 110, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 63, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 64, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 65, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 84, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 89, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 121, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 86, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 87, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 88, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 90, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 120, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 92, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 93, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 95, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 96, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(PerceptronKernel, 94, "SquashFactor", 0.0)
+#endif
+
+#ifdef MAXFILE_SIGNATURE
+#define MAXFILE_SIGNATURE_PRESENT 1
+MAXFILE_SIGNATURE("302d0215008792c51ae7cadee4377e737bba8901aad3b277680214359288ad4cc9adf76b8fc11171a5d26dbf35295a")
+#endif
+

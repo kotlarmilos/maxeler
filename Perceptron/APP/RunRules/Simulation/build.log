@@ -1,0 +1,81 @@
+Sat 05:05: ########################################## 
+Sat 05:05: Compiling.
+Sat 05:05: ########################################## 
+
+Sat 05:05: MaxCompiler version: 2015.1.1 (simulation only).
+Sat 05:05: Build Simulation run rule for Perceptron start time: Sat Jan 30 05:05:07 PST 2016.
+Sat 05:05: Project location: /home/demo/workspace/Perceptron.
+Sat 05:05: Detailed build log: /home/demo/workspace/Perceptron/RunRules/Simulation/build.log.
+
+Sat 05:05: Compiling Engine Code.
+Sat 05:05: Engine building skipped (no changes on .max files).
+Sat 05:05: Compiling CPU Code.
+Sat 05:05: Run CPU project make files updating
+Sat 05:05: Executing command:
+Sat 05:05: java -jar /opt/maxeler/maxcompiler/lib/MaxIDE/projectAdmin.jar -u /home/demo/workspace/Perceptron Simulation 
+Sat 05:05: Command output:
+
+Sat 05:05: MaxCompiler Project Admin Tool Version 2015.1.10001
+Sat 05:05:  Copyright Maxeler Technologies 2010 - 2015. All rights reserved.
+
+Sat 05:05: Handler version 2
+Sat 05:05: Updating RunRule dependent Makefiles for RunRule 'Simulation'
+Sat 05:05: 	Updating: Simulation
+Sat 05:05: Found makefiles: 1
+Sat 05:05: 	Updated: Simulation
+Sat 05:05: Run CPU make.
+Sat 05:05: make RUNRULE=Simulation 
+Sat 05:05: Command output:
+Sat 05:05: make -f Makefile.rules build
+Sat 05:05: make[1]: Entering directory `/home/demo/workspace/Perceptron/CPUCode'
+Sat 05:05: set -e; rm -f ../RunRules/Simulation/objects/c/PerceptronCpuCode.d ;                                                             \
+Sat 05:05: 	  cc -M -std=gnu99 -g -O3 -Wall -Wextra -I../RunRules/Simulation/include  -I '/opt/maxeler/maxcompiler/include/slic'  -Wno-error PerceptronCpuCode.c > ../RunRules/Simulation/objects/c/PerceptronCpuCode.d.$$ ;                                 \
+Sat 05:05:       sed 's,\(PerceptronCpuCode\)\.o[ :]*,../RunRules/Simulation/objects/c/\1.o ../RunRules/Simulation/objects/c/PerceptronCpuCode.d : ,g' < ../RunRules/Simulation/objects/c/PerceptronCpuCode.d.$$ > ../RunRules/Simulation/objects/c/PerceptronCpuCode.d; \
+Sat 05:05:       rm -f ../RunRules/Simulation/objects/c/PerceptronCpuCode.d.$$
+Sat 05:05: make[1]: Leaving directory `/home/demo/workspace/Perceptron/CPUCode'
+Sat 05:05: make[1]: Entering directory `/home/demo/workspace/Perceptron/CPUCode'
+Sat 05:05: cc -std=gnu99 -g -O3 -Wall -Wextra -I../RunRules/Simulation/include  -I '/opt/maxeler/maxcompiler/include/slic'  -c PerceptronCpuCode.c -o ../RunRules/Simulation/objects/c/PerceptronCpuCode.o
+Sat 05:05: cc -std=gnu99 -g -O3 -Wall -Wextra -I../RunRules/Simulation/include  -I '/opt/maxeler/maxcompiler/include/slic'  -o ../RunRules/Simulation/binaries/Perceptron ../RunRules/Simulation/objects/maxfiles/slic_Perceptron.o ../RunRules/Simulation/objects/c/PerceptronCpuCode.o -g -O3  -L '/opt/maxeler/maxcompiler/lib' -lslic -L '/opt/maxeler/maxcompiler/lib/maxeleros-sim/lib' -lmaxeleros -lpthread -lm -lrt 
+Sat 05:05: make[1]: Leaving directory `/home/demo/workspace/Perceptron/CPUCode'
+Sat 05:05: Build completed: Sat Jan 30 05:05:08 PST 2016
+
+
+Sat 05:05: ########################################## 
+Sat 05:05: Running
+Sat 05:05: ########################################## 
+Sat 05:05: Executing command:
+Sat 05:05: '/home/demo/workspace/Perceptron/RunRules/Simulation/binaries/Perceptron' 
+Sat 05:05: Command output:
+Sat 05:05: Generating input data...
+Sat 05:05: (14,-11,1)
+Sat 05:05: (11,4,1)
+Sat 05:05: (-9,4,-1)
+Sat 05:05: (5,10,-1)
+Sat 05:05: (-3,9,-1)
+Sat 05:05: (-3,-2,1)
+Sat 05:05: (2,-7,1)
+Sat 05:05: (-3,6,-1)
+Sat 05:05: (11,-13,1)
+Sat 05:05: (-15,6,-1)
+Sat 05:05: (0,7,-1)
+Sat 05:05: (-11,-14,1)
+Sat 05:05: (16,14,1)
+Sat 05:05: (-3,5,-1)
+Sat 05:05: (9,3,1)
+Sat 05:05: (11,6,1)
+Sat 05:05: Running on CPU...
+Sat 05:05: w0: -12
+Sat 05:05: w1: 12.5
+Sat 05:05: w2: -15
+
+
+Sat 05:05: Running on DFE...
+Sat 05:05: w0: -12
+Sat 05:05: w1: 12.5
+Sat 05:05: w2: -15
+
+
+Sat 05:05: CPU compute time: 5.4121e-05 s
+Sat 05:05: DFE compute time: 0.590263 s
+Sat 05:05: Test passed OK!
+Sat 05:05: Process terminated with exit code 0.

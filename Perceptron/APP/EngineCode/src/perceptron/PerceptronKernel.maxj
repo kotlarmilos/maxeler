@@ -1,0 +1,53 @@
+package perceptron;
+
+import com.maxeler.maxcompiler.v2.kernelcompiler.Kernel;
+import com.maxeler.maxcompiler.v2.kernelcompiler.KernelParameters;
+import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.CounterChain;
+import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.Stream.OffsetExpr;
+import com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEType;
+import com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar;
+
+class PerceptronKernel extends Kernel {
+
+	private static final DFEType type = dfeFloat(8, 24);
+
+	protected PerceptronKernel(KernelParameters parameters) {
+		super(parameters);
+
+		DFEVar dataPoints = io.scalarInput("points", dfeInt(32));
+
+		OffsetExpr loopLength = stream.makeOffsetAutoLoop("loopLength");
+		DFEVar looplenthVal = loopLength.getDFEVar(this, dfeUInt(8));
+
+		CounterChain chain = control.count.makeCounterChain();
+		DFEVar dataCounter = chain.addCounter(dataPoints.cast(dfeUInt(32)),1);
+		DFEVar loopCounter = chain.addCounter(looplenthVal, 1);
+
+		DFEVar x1 = io.input("cls", type, loopCounter === 0);
+		DFEVar x2 = io.input("x1", type, loopCounter === 0);
+		DFEVar cls = io.input("x2", type, loopCounter === 0);
+		DFEVar y = io.input("y", type, loopCounter === 0);
+
+		DFEVar w0Temp=0.5 * (cls - y) * (-1) / 2;
+		DFEVar w1Temp=0.5 * (cls - y) * (x1) / 2;
+		DFEVar w2Temp=0.5 * (cls - y) * (x2) / 2;
+
+		DFEVar w0 = carriedSum(w0Temp, dataCounter, loopLength);
+		DFEVar w1 = carriedSum(w1Temp, dataCounter, loopLength);
+		DFEVar w2 = carriedSum(w2Temp, dataCounter, loopLength);
+
+		io.output("w0",w0, type,  loopCounter === 0);
+		io.output("w1",w1, type,  loopCounter === 0);
+		io.output("w2",w2, type,  loopCounter === 0);
+	}
+
+	DFEVar carriedSum(DFEVar newW, DFEVar dataCounter, OffsetExpr loopLength){
+		DFEVar wSum = type.newInstance(this);
+		DFEVar sum = (dataCounter===0)? 0.0 : wSum;
+		DFEVar newSum = newW+sum;
+		DFEVar newSumOffset = stream.offset(newSum, -loopLength);
+		wSum <== newSumOffset;
+		return newSum;
+	}
+
+}

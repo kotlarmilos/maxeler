@@ -1,0 +1,60 @@
+package perceptron;
+
+import com.maxeler.maxcompiler.v2.kernelcompiler.Kernel;
+import com.maxeler.maxcompiler.v2.managers.BuildConfig;
+import com.maxeler.maxcompiler.v2.managers.engine_interfaces.CPUTypes;
+import com.maxeler.maxcompiler.v2.managers.engine_interfaces.EngineInterface;
+import com.maxeler.maxcompiler.v2.managers.engine_interfaces.InterfaceParam;
+import com.maxeler.maxcompiler.v2.managers.standard.Manager;
+import com.maxeler.maxcompiler.v2.managers.standard.Manager.IOType;
+
+public class PerceptronManager {
+
+	private static final String s_kernelName = "PerceptronKernel";
+
+	public static void main(String[] args) {
+		PerceptronEngineParameters params = new PerceptronEngineParameters(args);
+		Manager manager = new Manager(params);
+		Kernel kernel   = new PerceptronKernel(manager.makeKernelParameters(s_kernelName));
+		manager.setKernel(kernel);
+		manager.setIO(IOType.ALL_CPU);
+
+		manager.createSLiCinterface(interfaceDefault());
+
+		configBuild(manager, params);
+
+		manager.build();
+	}
+
+	private static EngineInterface interfaceDefault() {
+		EngineInterface engine_interface = new EngineInterface();
+		CPUTypes   type = CPUTypes.FLOAT;
+		int        size = type.sizeInBytes();
+
+		InterfaceParam  points  = engine_interface.addParam("points", CPUTypes.INT);
+		engine_interface.setScalar(s_kernelName, "points", points);
+
+		InterfaceParam 	loopLength = engine_interface.getAutoLoopOffset("PerceptronKernel", "loopLength");
+		engine_interface.ignoreAutoLoopOffset("PerceptronKernel", "loopLength");
+
+		engine_interface.setTicks(s_kernelName, points*loopLength );
+
+		engine_interface.setStream("x1", type, points * size);
+		engine_interface.setStream("x2", type, points * size);
+		engine_interface.setStream("cls", type, points * size);
+		engine_interface.setStream("y", type, points * size);
+		engine_interface.setStream("w0", type, points * size);
+		engine_interface.setStream("w1", type, points * size);
+		engine_interface.setStream("w2", type, points * size);
+
+		return engine_interface;
+	}
+
+	private static void configBuild(Manager manager, PerceptronEngineParameters params) {
+		manager.setEnableStreamStatusBlocks(false);
+		BuildConfig buildConfig = manager.getBuildConfig();
+		buildConfig.setMPPRCostTableSearchRange(params.getMPPRStartCT(), params.getMPPREndCT());
+		buildConfig.setMPPRParallelism(params.getMPPRThreads());
+		buildConfig.setMPPRRetryNearMissesThreshold(params.getMPPRRetryThreshold());
+	}
+}
