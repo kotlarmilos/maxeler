@@ -20,7 +20,7 @@ int main(void)
 	double startTime, cpuDuration, dfeDuration;
 
 	int sizeBytesFloat = iteration * sizeof(float);
-	int sizeBytesDouble = iteration * sizeof(double);
+	int sizeBytesDouble = size * sizeof(double);
 
 	double *mappedRom_x1=malloc(sizeBytesDouble);
 	double *mappedRom_x2=malloc(sizeBytesDouble);
