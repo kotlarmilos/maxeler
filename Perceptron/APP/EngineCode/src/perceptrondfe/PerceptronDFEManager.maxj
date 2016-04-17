@@ -1,0 +1,68 @@
+
+package perceptrondfe;
+
+import static com.maxeler.maxcompiler.v2.managers.standard.Manager.link;
+
+import com.maxeler.maxcompiler.v2.kernelcompiler.Kernel;
+import com.maxeler.maxcompiler.v2.managers.BuildConfig;
+import com.maxeler.maxcompiler.v2.managers.engine_interfaces.CPUTypes;
+import com.maxeler.maxcompiler.v2.managers.engine_interfaces.EngineInterface;
+import com.maxeler.maxcompiler.v2.managers.engine_interfaces.InterfaceParam;
+import com.maxeler.maxcompiler.v2.managers.standard.IOLink.IODestination;
+import com.maxeler.maxcompiler.v2.managers.standard.Manager;
+import com.maxeler.maxcompiler.v2.managers.standard.Manager.IOType;
+
+public class PerceptronDFEManager {
+
+	private static final String s_kernelName = "PerceptronDFEKernel";
+
+	public static void main(String[] args) {
+		int size=16;
+	
+		PerceptronDFEEngineParameters params = new PerceptronDFEEngineParameters(args);
+		Manager manager = new Manager(params);
+		Kernel kernel   = new PerceptronDFEKernel(manager.makeKernelParameters(s_kernelName),size);
+		manager.setKernel(kernel);
+		manager.setIO(IOType.ALL_CPU);
+
+		manager.createSLiCinterface(interfaceDefault());
+		configBuild(manager, params);
+		
+		manager.build();
+	}
+
+	private static EngineInterface interfaceDefault() {
+		EngineInterface engine_interface = new EngineInterface();
+		
+		CPUTypes   intType = CPUTypes.INT;
+		CPUTypes   floatType = CPUTypes.FLOAT;
+		int        floatSize = floatType.sizeInBytes();
+
+		InterfaceParam  iteration    = engine_interface.addParam("N", intType);
+		InterfaceParam  alpha    = engine_interface.addParam("alpha", floatType);
+		InterfaceParam  bias    = engine_interface.addParam("bias", floatType);
+
+		InterfaceParam 	loopLength = engine_interface.getAutoLoopOffset(s_kernelName, "loopLength");
+		engine_interface.ignoreAutoLoopOffset(s_kernelName, "loopLength");
+
+		engine_interface.setTicks(s_kernelName, iteration*loopLength);
+
+		engine_interface.setScalar(s_kernelName, "iteration", iteration);
+		engine_interface.setScalar(s_kernelName, "alpha", alpha);
+		engine_interface.setScalar(s_kernelName, "bias", bias);
+
+		engine_interface.setStream("w0", floatType, iteration * floatSize);
+		engine_interface.setStream("w1", floatType, iteration * floatSize);
+		engine_interface.setStream("w2", floatType, iteration * floatSize);
+		return engine_interface;
+	}
+	
+	private static void configBuild(Manager manager, PerceptronDFEEngineParameters params) {
+		manager.setEnableStreamStatusBlocks(false);
+		BuildConfig buildConfig = manager.getBuildConfig();
+		buildConfig.setMPPRCostTableSearchRange(params.getMPPRStartCT(), params.getMPPREndCT());
+		buildConfig.setMPPRParallelism(params.getMPPRThreads());
+		buildConfig.setMPPRRetryNearMissesThreshold(params.getMPPRRetryThreshold());
+	}
+}
+

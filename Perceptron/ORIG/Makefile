@@ -1,11 +1,11 @@
-NAME		= Perceptron
+NAME		= PerceptronDFE
 EXEC		= $(NAME)
 
 CC		= gcc
 CFLAGS		= -std=gnu99 -Wall
 LDFLAGS		= -lm
 
-OBJ		= Perceptron.o
+OBJ		= PerceptronDFE.o
 
 all:		run
 

@@ -1,0 +1,114 @@
+package perceptrondfe;
+
+import com.maxeler.maxcompiler.v2.kernelcompiler.Kernel;
+import com.maxeler.maxcompiler.v2.kernelcompiler.KernelParameters;
+import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.CounterChain;
+import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.Stream.OffsetExpr;
+import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.memory.Memory;
+import com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEFix.SignMode;
+import com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEType;
+import com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar;
+import com.maxeler.maxcompiler.v2.utils.MathUtils;
+
+
+class PerceptronDFEKernel extends Kernel {
+
+	private static final DFEType floatingType = dfeFloat(8,24);
+	private static final DFEType fixedType = dfeFixOffset(32, -8, SignMode.TWOSCOMPLEMENT);
+	private static final DFEType unsignedType=dfeUInt(32);
+
+	protected PerceptronDFEKernel(KernelParameters parameters, int size) {
+		super(parameters);
+
+		//Offset
+		OffsetExpr loopLength = stream.makeOffsetAutoLoop("loopLength");
+		DFEVar looplenthVal = loopLength.getDFEVar(this, unsignedType);
+
+
+		//Input
+		DFEVar iteration = io.scalarInput("iteration", unsignedType);
+
+		DFEVar alpha = io.scalarInput("alpha", floatingType);
+		alpha=alpha.cast(fixedType);
+
+		DFEVar bias = io.scalarInput("bias", floatingType);
+		bias=bias.cast(fixedType);
+
+
+		//Counter
+		CounterChain chain = control.count.makeCounterChain();
+		DFEVar dataCounter = chain.addCounter(iteration,1);
+		DFEVar loopCounter = chain.addCounter(looplenthVal, 1);
+
+
+		//Memory
+		Memory<DFEVar> ROM_x1=mem.alloc(floatingType, size);
+		ROM_x1.mapToCPU("mappedRom_1");
+
+		Memory<DFEVar> ROM_x2=mem.alloc(floatingType, size);
+		ROM_x2.mapToCPU("mappedRom_2");
+
+		Memory<DFEVar> ROM_class=mem.alloc(floatingType, size);
+		ROM_class.mapToCPU("mappedRom_3");
+
+
+		//CarriedSum
+		DFEVar carried_w0 = fixedType.newInstance(this);
+		DFEVar carried_w1 = fixedType.newInstance(this);
+		DFEVar carried_w2 = fixedType.newInstance(this);
+
+
+		//Computation
+		DFEVar old_w0=dataCounter===0?constant.var(0):carried_w0;
+		DFEVar old_w1=dataCounter===0?constant.var(0):carried_w1;
+		DFEVar old_w2=dataCounter===0?constant.var(0):carried_w2;
+
+		DFEVar sum_w0=old_w0;
+		DFEVar sum_w1=old_w1;
+		DFEVar sum_w2=old_w2;
+
+		for (int i=0;i<size;i++){
+			DFEVar address=constant.var(i);
+			address=address.cast(dfeUInt(MathUtils.bitsToAddress(size)));
+
+			DFEVar x1=ROM_x1.read(address);
+			DFEVar x2=ROM_x2.read(address);
+			DFEVar cls=ROM_class.read(address);
+
+			x1=x1.cast(fixedType);
+			x2=x2.cast(fixedType);
+			cls=cls.cast(fixedType);
+
+			DFEVar meta=(old_w1*x1)+(old_w2*x2)-old_w0;
+			DFEVar y=(meta<0)?constant.var(fixedType,-1):constant.var(fixedType,1);
+
+			DFEVar new_w0 = alpha * (cls - y) * bias / 2;
+			DFEVar new_w1 = alpha * (cls - y) * x1 / 2;
+			DFEVar new_w2 = alpha * (cls - y) * x2 / 2;
+
+			sum_w0=sum_w0+new_w0;
+			sum_w1=sum_w1+new_w1;
+			sum_w2=sum_w2+new_w2;
+		}
+
+		carried_w0 <== stream.offset(sum_w0, -loopLength);
+		carried_w1 <== stream.offset(sum_w1, -loopLength);
+		carried_w2 <== stream.offset(sum_w2, -loopLength);
+
+
+		//Watch
+		//loopCounter.simWatch("loopCounter");
+		//looplenthVal.simWatch("iterationTick");
+
+
+		//Output
+		DFEVar w0=sum_w0.cast(floatingType);
+		DFEVar w1=sum_w1.cast(floatingType);
+		DFEVar w2=sum_w2.cast(floatingType);
+
+		io.output("w0", w0, floatingType, loopCounter===0);
+		io.output("w1", w1, floatingType, loopCounter===0);
+		io.output("w2", w2, floatingType, loopCounter===0);
+	}
+
+}

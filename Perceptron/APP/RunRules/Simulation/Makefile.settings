@@ -5,13 +5,13 @@
 MAXCOMPILER_QUOTE   := $(shell printf %q "$(MAXCOMPILERDIR)")
 
 RUNRULE_ARGS        := 
-RUNRULE_RUNENV      := MAXELEROSDIR="$(MAXCOMPILERDIR)/lib/maxeleros-sim" LD_LIBRARY_PATH="$(MAXCOMPILERDIR)/lib/maxeleros-sim/lib:$$LD_LIBRARY_PATH" SLIC_CONF="use_simulation=demoPerceptron;"  
-RUNRULE_MAXFILES    := Perceptron.max  
-RUNRULE_MAXFILES_H  := Perceptron.h 
+RUNRULE_RUNENV      := MAXELEROSDIR="$(MAXCOMPILERDIR)/lib/maxeleros-sim" LD_LIBRARY_PATH="$(MAXCOMPILERDIR)/lib/maxeleros-sim/lib:$$LD_LIBRARY_PATH" SLIC_CONF="use_simulation=azaidPerceptronDFE;"  
+RUNRULE_MAXFILES    := PerceptronDFE.max  
+RUNRULE_MAXFILES_H  := PerceptronDFE.h 
 RUNRULE_CFLAGS      := 
 RUNRULE_LDFLAGS     := 
 
-TARGET_EXEC         := Perceptron
+TARGET_EXEC         := PerceptronDFE
 TARGET_LIBRARY      := 
 
 

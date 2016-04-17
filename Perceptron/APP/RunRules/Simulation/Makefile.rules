@@ -49,20 +49,20 @@ build: maxfiles
 maxfiles: $(MAXFILES_MAX)
 
 #
-# MaxFile: Perceptron
+# MaxFile: PerceptronDFE
 #
 
 
-BUILDNAME_MAXFILE_1:=Perceptron
-MAXFILE_1:=Perceptron.max
+BUILDNAME_MAXFILE_1:=PerceptronDFE
+MAXFILE_1:=PerceptronDFE.max
 
-include/Perceptron.h: maxfiles/Perceptron.h
+include/PerceptronDFE.h: maxfiles/PerceptronDFE.h
 	cp $< $@
 
-maxfiles/Perceptron.max maxfiles/Perceptron.h:
+maxfiles/PerceptronDFE.max maxfiles/PerceptronDFE.h:
 # Ensure that maxfiles do not get build by this Makefile when running in MaxIDE
 ifndef MAXIDE_RUN
-	env  MAX_BUILDPARAMS=" DFEModel=VECTIS  target=DFE_SIM  maxFileName=Perceptron "  ant -v -f Perceptron.xml
+	env  MAX_BUILDPARAMS=" DFEModel=VECTIS  target=DFE_SIM  maxFileName=PerceptronDFE "  ant -v -f PerceptronDFE.xml
 else
 	test -f $@ || ( echo 'Maxfile unavailable: $@' >/dev/stderr ; exit 1 )
 endif
@@ -70,10 +70,10 @@ endif
 
 
 startsim:
-	'$(MAXCOMPILERDIR)/bin/maxcompilersim' -n demoPerceptron -c VECTIS -d 1  restart
+	'$(MAXCOMPILERDIR)/bin/maxcompilersim' -n azaidPerceptronDFE -c VECTIS -d 1  restart
 
 stopsim:
-	'$(MAXCOMPILERDIR)/bin/maxcompilersim' -n demoPerceptron -c VECTIS -d 1  stop
+	'$(MAXCOMPILERDIR)/bin/maxcompilersim' -n azaidPerceptronDFE -c VECTIS -d 1  stop
 
 clean: clean-dist clean-objects clean-installers
 distclean: clean clean-maxfiles
